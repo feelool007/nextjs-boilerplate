@@ -1,0 +1,56 @@
+{
+  "name": "nextjs-mui-boilerplate",
+  "version": "1.0.0",
+  "description": "A boilerplate for next.js project with material-ui",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --env=node --watchAll --no-cache",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "KLCho",
+  "license": "MIT",
+  "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
+    "jss": "^9.8.7",
+    "next": "^8.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-jss": "^8.6.1"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.7",
+    "@types/enzyme": "^3.9.2",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/jest": "^24.0.12",
+    "@types/next": "^8.0.5",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.8.17",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-jss": "^8.6.3",
+    "@types/styled-jsx": "^2.2.8",
+    "@zeit/next-typescript": "^1.1.1",
+    "babel-jest": "^24.8.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.0",
+    "enzyme-to-json": "^3.3.5",
+    "jest": "^24.8.0",
+    "typescript": "^3.4.5"
+  },
+  "peerDependencies": {
+    "classnames": "^2.2.6"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
