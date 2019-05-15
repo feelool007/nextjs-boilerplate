@@ -13,3 +13,8 @@ export interface PContainer extends WithStyles<typeof layoutStyles> {
 }
 
 export interface PLayout {}
+
+export interface SLayout {
+  rwdOpen: boolean,
+  mini: boolean
+}

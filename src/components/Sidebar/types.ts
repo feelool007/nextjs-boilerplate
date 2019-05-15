@@ -27,5 +27,7 @@ export interface SSidebarMenu {
 export interface PSidebar extends WithStyles<typeof sidebarStyles> {
   brand?: string,
   mini?: boolean,
-  pageGroups: PageGroup[]
+  rwdOpen?: boolean,
+  pageGroups: PageGroup[],
+  onToggleRwd: () => void
 }

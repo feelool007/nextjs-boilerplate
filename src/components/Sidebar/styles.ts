@@ -4,18 +4,19 @@ export const sidebarStyles = (theme: Theme) => createStyles({
   rootBasic: {
     backgroundColor: "#2c2c2c",
     position: "relative",
-    height: "100vh"
+    height: "100vh",
+    overflowX: "hidden",
+    transition: "width 0.2s"
   },
   rootMini: {
-    width: 60,
-    maxWidth: 60
+    width: 60
   },
   rootNormal: {
-    width: 260,
-    maxWidth: 260
+    width: 260
   },
   brandContainer: {
-    width: "100%"
+    width: "100%",
+    overflow: "hidden"
   },
   brand: {
     fontSize: 20,
@@ -24,6 +25,11 @@ export const sidebarStyles = (theme: Theme) => createStyles({
     textAlign: "center",
     paddingBottom: theme.spacing.unit * 1,
     borderBottom: "0.3mm solid white"
+  },
+  brandMini: {
+    fontSize: 20,
+    textAlign: "center",
+    color: "rgb(235, 235, 235)",
   },
   menuRoot: {
     padding: 0
