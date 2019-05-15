@@ -1,5 +1,6 @@
 import React from "react";
-import { List, ListItem, ListItemText, Collapse, Paper, Popper, withStyles, Typography } from "@material-ui/core";
+import { List, ListItem, ListItemText, Collapse, Paper, Popper, withStyles } from "@material-ui/core";
+import { KeyboardArrowDown, KeyboardArrowUp } from "@material-ui/icons";
 import Link from "next/link";
 import classNames from "classnames";
 
@@ -103,7 +104,10 @@ class SidebarMenu extends React.Component<PSidebarMenu, SSidebarMenu> {
           })}
         >
           <Icon className={classes.icon} />
-          <p className={classes.menuText}>{groupName}</p>
+          <div className={classes.flex}>
+            <p className={classes.menuText}>{groupName}</p>
+          </div>
+          {openCollapse ? <KeyboardArrowUp className={classes.icon} /> : <KeyboardArrowDown className={classes.icon} />}
         </ListItem>
         <Collapse in={openCollapse}>{this.handleGenerateMenu()}</Collapse>
       </List>

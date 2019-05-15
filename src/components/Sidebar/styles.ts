@@ -84,5 +84,8 @@ export const sidebarStyles = (theme: Theme) => createStyles({
   },
   icon: {
     fontSize: 16
+  },
+  flex: {
+    flex: 1
   }
 })

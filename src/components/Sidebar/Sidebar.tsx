@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Drawer, withStyles, List, ListItem, ListItemText, Hidden } from "@material-ui/core";
 import { Home } from "@material-ui/icons";
 import classNames from "classnames";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css"
 
 import { PSidebar } from "./types";
 import { sidebarStyles } from "./styles";
@@ -18,7 +20,7 @@ class Sidebar extends React.Component<PSidebar> {
   handleGenerateContent = () => {
     const { mini, brand, pageGroups, classes } = this.props;
     return (
-      <React.Fragment>
+      <PerfectScrollbar>
         <List>
           <Link href="/">
             <ListItem button className={classes.brandContainer}>
@@ -35,11 +37,10 @@ class Sidebar extends React.Component<PSidebar> {
             </ListItem>
           </Link>
         </List>
-
         {pageGroups.map((d, index) => {
           return <SidebarMenu mini={mini} key={index} pageGroup={d} />;
         })}
-      </React.Fragment>
+      </PerfectScrollbar>
     );
   };
 
