@@ -20,7 +20,7 @@ const pages: PageGroup[] = [
       { name: "首頁004", to: "/" },
       { name: "首頁005", to: "/" },
       { name: "首頁006", to: "/" },
-      { name: "首頁007", to: "/" }
+      { name: "錯誤007", to: "/nothing" }
     ]
   },
   {
@@ -33,7 +33,7 @@ const pages: PageGroup[] = [
       { name: "關於004", to: "/about" },
       { name: "關於005", to: "/about" },
       { name: "關於006", to: "/about" },
-      { name: "關於007", to: "/about" }
+      { name: "錯誤007", to: "/nothing" }
     ]
   }
 ];
