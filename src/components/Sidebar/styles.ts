@@ -15,21 +15,22 @@ export const sidebarStyles = (theme: Theme) => createStyles({
     width: 260
   },
   brandContainer: {
-    width: "100%",
-    overflow: "hidden"
+    width: "100%"
   },
   brand: {
     fontSize: 20,
     fontWeight: "bold",
     color: "rgb(235, 235, 235)",
     textAlign: "center",
+    textOverflow: "clip",
+    whiteSpace: "nowrap",
     paddingBottom: theme.spacing.unit * 1,
     borderBottom: "0.3mm solid white"
   },
   brandMini: {
     fontSize: 20,
     textAlign: "center",
-    color: "rgb(235, 235, 235)",
+    color: "rgb(235, 235, 235)"
   },
   menuRoot: {
     padding: 0
