@@ -2,6 +2,7 @@ import React from "react";
 import { List, ListItem, ListItemText, Collapse, Paper, Popper, withStyles } from "@material-ui/core";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@material-ui/icons";
 import Link from "next/link";
+import { withRouter } from "next/router";
 import classNames from "classnames";
 
 import { PSidebarMenu, SSidebarMenu } from "./types";
@@ -42,7 +43,7 @@ class SidebarMenu extends React.Component<PSidebarMenu, SSidebarMenu> {
   };
 
   handleGenerateMenu = () => {
-    const { classes } = this.props;
+    const { router, classes } = this.props;
     const { pages } = this.props.pageGroup;
     return pages.map((d, index) => {
       return (
@@ -51,7 +52,7 @@ class SidebarMenu extends React.Component<PSidebarMenu, SSidebarMenu> {
             button
             className={classNames({
               [classes.menuItem]: true,
-              [classes.menuItemHighlight]: false
+              [classes.menuItemHighlight]: d.to === router.pathname
             })}
           >
             <ListItemText
@@ -59,7 +60,7 @@ class SidebarMenu extends React.Component<PSidebarMenu, SSidebarMenu> {
               classes={{
                 primary: classNames({
                   [classes.menuItemText]: true,
-                  [classes.menuItemTextHighlight]: false
+                  [classes.menuItemTextHighlight]: d.to === router.pathname
                 })
               }}
             />
@@ -115,4 +116,6 @@ class SidebarMenu extends React.Component<PSidebarMenu, SSidebarMenu> {
   };
 }
 
-export default withStyles(sidebarStyles)(SidebarMenu);
+// There is a bug in withRouter type checking. Keep it quiet until fixed.
+// @ts-ignore
+export default withStyles(sidebarStyles)(withRouter(SidebarMenu));

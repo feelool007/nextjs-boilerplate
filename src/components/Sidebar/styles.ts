@@ -58,7 +58,8 @@ export const sidebarStyles = (theme: Theme) => createStyles({
     marginLeft: theme.spacing.unit * 2
   },
   menuItem: {
-    height: 40
+    height: 40,
+    marginLeft: theme.spacing.unit * 1.5
   },
   menuItemText: {
     fontSize: 14,
@@ -71,7 +72,6 @@ export const sidebarStyles = (theme: Theme) => createStyles({
   menuItemHighlight: {
     backgroundColor: "#00bcd4",
     width: "85%",
-    marginLeft: theme.spacing.unit * 2,
     border: "1px solid #00838f",
     borderRadius: 8,
     "&:hover": {

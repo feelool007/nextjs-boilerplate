@@ -1,5 +1,6 @@
 import { WithStyles } from "@material-ui/core";
 import { SvgIconProps } from "@material-ui/core/SvgIcon";
+import { RouterProps } from "next/router";
 
 import { sidebarStyles } from "./styles";
 
@@ -16,7 +17,8 @@ export interface PageGroup {
 
 export interface PSidebarMenu extends WithStyles<typeof sidebarStyles> {
   mini?: boolean,
-  pageGroup: PageGroup
+  pageGroup: PageGroup,
+  router: RouterProps
 }
 
 export interface SSidebarMenu {
