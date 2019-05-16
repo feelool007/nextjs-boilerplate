@@ -7,6 +7,7 @@ import MainPanel from "./MainPanel";
 import Container from "./Container";
 import { Sidebar } from "../Sidebar";
 import { Header } from "../Header";
+import { Footer } from "../Footer";
 import { pageGroups } from "../../_helpers/fakeData";
 
 class Layout extends React.Component<PLayout, SLayout> {
@@ -15,7 +16,7 @@ class Layout extends React.Component<PLayout, SLayout> {
     this.state = {
       rwdOpen: false,
       mini: false
-    }
+    };
   }
 
   handleToggleMini = () => {
@@ -29,7 +30,7 @@ class Layout extends React.Component<PLayout, SLayout> {
     this.setState(prevState => ({
       mini: false,
       rwdOpen: !prevState.rwdOpen
-    }))
+    }));
   };
 
   render = () => {
@@ -38,7 +39,13 @@ class Layout extends React.Component<PLayout, SLayout> {
     return (
       <Wrapper>
         <SidebarWrapper>
-          <Sidebar brand="NextJS Boilerplate" pageGroups={pageGroups} mini={mini} rwdOpen={rwdOpen} onToggleRwd={this.handleToggleRwd} />
+          <Sidebar
+            brand="NextJS Boilerplate"
+            pageGroups={pageGroups}
+            mini={mini}
+            rwdOpen={rwdOpen}
+            onToggleRwd={this.handleToggleRwd}
+          />
         </SidebarWrapper>
         <MainPanel>
           <Container>
@@ -50,7 +57,9 @@ class Layout extends React.Component<PLayout, SLayout> {
             {/* This is page content. */}
             {children}
           </Container>
-          <Container>This is footer</Container>
+          <Container>
+            <Footer />
+          </Container>
         </MainPanel>
       </Wrapper>
     );
