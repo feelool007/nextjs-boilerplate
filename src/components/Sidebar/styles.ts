@@ -46,13 +46,10 @@ export const sidebarStyles = (theme: Theme) => createStyles({
     paddingBottom: theme.spacing.unit * 1,
   },
   menuOpen: {
-    color: "#00ACC1"
+    color: "white"
   },  
   menuClose: {
-    color: "rgb(185, 185, 185)",
-    "&:hover": {
-      color: "rgb(255, 255, 255)"
-    }
+    color: "rgb(185, 185, 185)"
   },
   menuText: {
     marginLeft: theme.spacing.unit * 2

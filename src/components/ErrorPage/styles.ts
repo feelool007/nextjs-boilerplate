@@ -29,6 +29,7 @@ export const errorPageStyles = (theme: Theme) => createStyles({
     fontSize: 30,
     margin: 0,
     marginTop: theme.spacing.unit * 2,
-    color: "grey"
+    color: "grey",
+    whiteSpace: "pre-line"
   }
 })
