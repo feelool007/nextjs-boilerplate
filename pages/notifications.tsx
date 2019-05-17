@@ -22,7 +22,10 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       width: "65%",
-      padding: theme.spacing.unit * 2
+      padding: theme.spacing.unit * 2,
+      [theme.breakpoints.down("md")]: {
+        width: "100%"
+      }
     },
     button: {
       marginRight: theme.spacing.unit * 1

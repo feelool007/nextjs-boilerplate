@@ -26,5 +26,11 @@ export const layoutStyles = (theme: Theme) => createStyles({
   },
   flex: {
     flex: 1
+  },
+  progress: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100vw"
   }
 });
