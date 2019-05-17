@@ -8,7 +8,7 @@ export const pageGroups: PageGroup[] = [
     groupName: "Index",
     pages: [
       { name: "首頁001", to: "/" },
-      { name: "錯誤001", to: "/nothing" }
+      { name: "通知資訊元件", to: "/notifications" }
     ]
   },
   {
