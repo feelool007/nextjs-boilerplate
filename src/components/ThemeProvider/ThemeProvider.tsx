@@ -1,15 +1,15 @@
 import React from "react";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
-import { lightBlue, purple, green, orange, red, grey } from "@material-ui/core/colors";
+import { cyan, purple, green, orange, red, grey } from "@material-ui/core/colors";
 
-import { PThemeProvider, ThemeVariants } from "./types";
+import { PThemeProvider, ThemeColors } from "./types";
 
 const themePrimary = createMuiTheme({
   typography: {
     useNextVariants: true
   },
   palette: {
-    primary: lightBlue
+    primary: cyan
   }
 })
 
@@ -58,7 +58,7 @@ const themeDefault = createMuiTheme({
   }
 })
 
-const themes: ThemeVariants = {
+const themes: ThemeColors = {
   primary: themePrimary,
   secondary: themeSecondary,
   success: themeSuccess,
@@ -69,12 +69,12 @@ const themes: ThemeVariants = {
 
 class ThemeProvider extends React.Component<PThemeProvider> {
   static defaultProps = {
-    variant: "default"
+    color: "default"
   }
 
   render = () => {
-    const { variant, children } = this.props;
-    const theme = themes[(variant as string)];
+    const { color, children } = this.props;
+    const theme = themes[(color as string)];
     return (
       <MuiThemeProvider theme={theme}>
         {children}

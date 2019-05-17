@@ -7,16 +7,17 @@ export const pageGroups: PageGroup[] = [
     icon: People,
     groupName: "Index",
     pages: [
-      { name: "首頁001", to: "/" },
-      { name: "通知資訊元件", to: "/notifications" }
+      { name: "index", to: "/" },
+      { name: "Notifications", to: "/notifications" },
+      { name: "Buttons", to: "/buttons" },
     ]
   },
   {
     icon: Dashboard,
     groupName: "About",
     pages: [
-      { name: "關於001", to: "/about" },
-      { name: "錯誤001", to: "/nothing" }
+      { name: "About", to: "/about" },
+      { name: "ErrorPage", to: "/nothing" }
     ]
   }
 ];

@@ -1,12 +1,12 @@
 import { Theme } from "@material-ui/core";
 
-export type ThemeVariantKeys = "primary" | "secondary" | "success" | "warning" | "danger" | "default";
+export type ThemeColorKeys = "primary" | "secondary" | "success" | "warning" | "danger" | "default";
 
 export interface PThemeProvider {
-  variant?: ThemeVariantKeys;
+  color?: ThemeColorKeys;
 }
 
-export interface ThemeVariants {
+export interface ThemeColors {
   primary: Theme;
   secondary: Theme;
   success: Theme;
