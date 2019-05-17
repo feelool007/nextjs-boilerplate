@@ -21,9 +21,9 @@ class Sidebar extends React.Component<PSidebar> {
     const { mini, brand, pageGroups, classes } = this.props;
     return (
       <PerfectScrollbar>
-        <List>
+        <List className={classes.brandContainer}>
           <Link href="/">
-            <ListItem button className={classes.brandContainer}>
+            <ListItem button>
               {mini ? (
                 <Home className={classes.brandMini} />
               ) : (

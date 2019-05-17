@@ -15,7 +15,9 @@ export const sidebarStyles = (theme: Theme) => createStyles({
     width: 260
   },
   brandContainer: {
-    width: "100%"
+    width: "100%",
+    height: 60,
+    borderBottom: "0.2mm solid rgb(205, 205, 205)"
   },
   brand: {
     fontSize: 20,
@@ -23,25 +25,22 @@ export const sidebarStyles = (theme: Theme) => createStyles({
     color: "rgb(235, 235, 235)",
     textAlign: "center",
     textOverflow: "clip",
-    whiteSpace: "nowrap",
-    paddingBottom: theme.spacing.unit * 1,
-    borderBottom: "0.3mm solid white"
+    whiteSpace: "nowrap"
   },
   brandMini: {
-    fontSize: 20,
-    textAlign: "center",
+    fontSize: 24,
     color: "rgb(235, 235, 235)"
   },
   menuRoot: {
     padding: 0
   },
   menu: {
-    fontSize: 16,
+    fontSize: 18,
     height: 55
   },
   popperMenu: {
     backgroundColor: "#424242",
-    width: 240,
+    width: 260,
     paddingTop: theme.spacing.unit * 1,
     paddingBottom: theme.spacing.unit * 1,
   },
@@ -59,7 +58,7 @@ export const sidebarStyles = (theme: Theme) => createStyles({
     marginLeft: theme.spacing.unit * 1.5
   },
   menuItemText: {
-    fontSize: 14,
+    fontSize: 16,
     color: "rgb(185, 185, 185)",
     paddingLeft: "1.5em",
     "&:hover": {
@@ -80,7 +79,7 @@ export const sidebarStyles = (theme: Theme) => createStyles({
     fontWeight: "bold"
   },
   icon: {
-    fontSize: 16
+    fontSize: 20
   },
   flex: {
     flex: 1
