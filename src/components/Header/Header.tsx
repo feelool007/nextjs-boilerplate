@@ -23,7 +23,7 @@ class Header extends React.Component<PHeader> {
     return (
       <div className={classes.root}>
         <div className={classes.flex}>
-          <Grid container alignItems="flex-end">
+          <Grid container alignItems="center">
             <Hidden mdDown>
               <Menu className={classes.menuToggler} onClick={onToggleMini} />
             </Hidden>

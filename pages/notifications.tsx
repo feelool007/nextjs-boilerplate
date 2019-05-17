@@ -5,7 +5,6 @@ import {
   Theme,
   WithStyles,
   Grid,
-  Button,
   Radio,
   RadioGroup,
   FormControlLabel,
@@ -16,7 +15,7 @@ import {
 import { SnackbarProps, SnackbarOrigin } from "@material-ui/core/Snackbar";
 import { RadioGroupProps } from "@material-ui/core/RadioGroup";
 
-import { Notification } from "../src/components";
+import { Notification, Button } from "../src/components";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -145,7 +144,7 @@ class Content extends React.Component<PContent, SContent> {
             </Button>
             <Button
               size="medium"
-              color="secondary"
+              color="danger"
               variant="contained"
               onClick={this.handleClose}
               className={classes.button}
