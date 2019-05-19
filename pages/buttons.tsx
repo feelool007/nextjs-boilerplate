@@ -2,11 +2,11 @@ import React from "react";
 import { createStyles, Theme, WithStyles, withStyles, Grid, Paper, Typography, Divider } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 
-import { Button } from "../src/components";
+import { Button, IconButton } from "../src/components";
 
 const styles = (theme: Theme) => createStyles({
   root: {
-    width: "65%",
+    width: "85%",
     padding: theme.spacing.unit * 2,
     [theme.breakpoints.down("md")]: {
       width: "100%"
@@ -78,6 +78,16 @@ class Content extends React.Component<PContent> {
             <Button variant="extendedFab" color="success"><Add />SUCCESS</Button>
             <Button variant="extendedFab" color="warning"><Add />WARNING</Button>
             <Button variant="extendedFab" color="danger"><Add />DANGER</Button>
+          </Grid>
+          <Divider className={classes.divider} />
+          <Typography variant="h5" className={classes.title}>Icon button</Typography>
+          <Grid container justify="space-between">
+            <IconButton color="default"><Add /></IconButton>
+            <IconButton color="primary"><Add /></IconButton>
+            <IconButton color="secondary"><Add /></IconButton>
+            <IconButton color="success"><Add /></IconButton>
+            <IconButton color="warning"><Add /></IconButton>
+            <IconButton color="danger"><Add /></IconButton>
           </Grid>
           <Divider className={classes.divider} />
         </Paper>
