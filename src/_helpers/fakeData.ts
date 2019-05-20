@@ -10,6 +10,7 @@ export const pageGroups: PageGroup[] = [
       { name: "index", to: "/" },
       { name: "Notifications", to: "/notifications" },
       { name: "Buttons", to: "/buttons" },
+      { name: "Selection Controls", to: "/selection-controls" },
     ]
   },
   {
