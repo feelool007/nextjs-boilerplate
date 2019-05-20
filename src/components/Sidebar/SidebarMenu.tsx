@@ -1,6 +1,7 @@
 import React from "react";
 import { List, ListItem, ListItemText, Collapse, Paper, Popper, withStyles } from "@material-ui/core";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@material-ui/icons";
+import { ListItemProps } from "@material-ui/core/ListItem";
 import Link from "next/link";
 import { withRouter } from "next/router";
 import classNames from "classnames";
@@ -42,6 +43,11 @@ class SidebarMenu extends React.Component<PSidebarMenu, SSidebarMenu> {
     });
   };
 
+  handleBlur = () => {
+    const listItems = document.getElementsByName("li-item");
+    listItems.forEach(el => el.blur());
+  };
+
   handleGenerateMenu = () => {
     const { router, classes } = this.props;
     const { pages } = this.props.pageGroup;
@@ -50,10 +56,12 @@ class SidebarMenu extends React.Component<PSidebarMenu, SSidebarMenu> {
         <Link key={index} href={d.to}>
           <ListItem
             button
+            name="li-item"
             className={classNames({
               [classes.menuItem]: true,
               [classes.menuItemHighlight]: d.to === router.pathname
             })}
+            onClick={this.handleBlur}
           >
             <ListItemText
               primary={d.name}
