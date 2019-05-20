@@ -26,5 +26,8 @@ export const notificationStyles = (theme: Theme) => createStyles({
   icon: {
     fontSize: 18,
     marginRight: theme.spacing.unit * 1
+  },
+  iconClear: {
+    cursor: "pointer"
   }
 })

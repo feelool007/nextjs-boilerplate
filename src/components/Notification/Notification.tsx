@@ -40,11 +40,7 @@ class Notification extends React.Component<PNotification> {
               {message}
             </Grid>
           }
-          action={
-            <IconButton onClick={onClose}>
-              <Clear className={classNames(classes.icon, classes[variant])} />
-            </IconButton>
-          }
+          action={<Clear onClick={onClose} className={classNames(classes.icon, classes.iconClear, classes[variant])} />}
           className={classNames(classes.content, classes[variant])}
         />
       </Snackbar>
