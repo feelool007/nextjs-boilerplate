@@ -8,12 +8,13 @@ import {
   Paper,
   Typography,
   Divider,
-  RadioGroup
+  RadioGroup,
+  FormGroup
 } from "@material-ui/core";
 import { RadioGroupProps } from "@material-ui/core/RadioGroup";
-import { CheckCircle, RadioButtonUnchecked } from "@material-ui/icons";
+import { CheckCircle, RadioButtonUnchecked, Favorite, FavoriteBorder } from "@material-ui/icons";
 
-import { Radio } from "../src/components";
+import { Radio, Checkbox } from "../src/components";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -32,7 +33,7 @@ const styles = (theme: Theme) =>
       marginBottom: theme.spacing.unit * 1.5,
       color: "grey"
     },
-    radioContainer: {
+    controlsContainer: {
       display: "flex",
       justifyContent: "space-between"
     }
@@ -65,7 +66,7 @@ class Content extends React.Component<PContent, SContent> {
           <Typography variant="h5" className={classes.title}>
             Radio buttons
           </Typography>
-          <RadioGroup row value={radioValue} onChange={this.handleChange} className={classes.radioContainer}>
+          <RadioGroup row value={radioValue} onChange={this.handleChange} className={classes.controlsContainer}>
             <Radio value="default" color="default" label="DEFAULT" />
             <Radio value="primary" color="primary" label="PRIMARY" />
             <Radio value="secondary" color="secondary" label="SECONDARY" />
@@ -77,7 +78,7 @@ class Content extends React.Component<PContent, SContent> {
           <Typography variant="h5" className={classes.title}>
             Customed radio buttons
           </Typography>
-          <RadioGroup row value={radioValue} onChange={this.handleChange} className={classes.radioContainer}>
+          <RadioGroup row value={radioValue} onChange={this.handleChange} className={classes.controlsContainer}>
             <Radio value="default" color="default" label="DEFAULT" icon={<RadioButtonUnchecked />} checkedIcon={<CheckCircle />} />
             <Radio value="primary" color="primary" label="PRIMARY" icon={<RadioButtonUnchecked />} checkedIcon={<CheckCircle />}/>
             <Radio value="secondary" color="secondary" label="SECONDARY" icon={<RadioButtonUnchecked />} checkedIcon={<CheckCircle />} />
@@ -85,6 +86,30 @@ class Content extends React.Component<PContent, SContent> {
             <Radio value="warning" color="warning" label="WARNING" icon={<RadioButtonUnchecked />} checkedIcon={<CheckCircle />} />
             <Radio value="danger" color="danger" label="DANGER" icon={<RadioButtonUnchecked />} checkedIcon={<CheckCircle />} />
           </RadioGroup>
+          <Divider className={classes.divider} />
+          <Typography variant="h5" className={classes.title}>
+            Checkboxes
+          </Typography>
+          <FormGroup row className={classes.controlsContainer}>
+            <Checkbox checked value="default" color="default" label="DEFAULT" />
+            <Checkbox checked value="primary" color="primary" label="PRIMARY" />
+            <Checkbox checked value="secondary" color="secondary" label="SECONDARY" />
+            <Checkbox checked value="success" color="success" label="SUCCESS" />
+            <Checkbox checked value="warning" color="warning" label="WARNING" />
+            <Checkbox checked value="danger" color="danger" label="DANGER" />
+          </FormGroup>
+          <Divider className={classes.divider} />
+          <Typography variant="h5" className={classes.title}>
+            Custom checkboxes
+          </Typography>
+          <FormGroup row className={classes.controlsContainer}>
+            <Checkbox checked value="default" color="default" label="DEFAULT" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            <Checkbox checked value="primary" color="primary" label="PRIMARY" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            <Checkbox checked value="secondary" color="secondary" label="SECONDARY" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            <Checkbox checked value="success" color="success" label="SUCCESS" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            <Checkbox checked value="warning" color="warning" label="WARNING" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            <Checkbox checked value="danger" color="danger" label="DANGER" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+          </FormGroup>
           <Divider className={classes.divider} />
         </Paper>
       </Grid>

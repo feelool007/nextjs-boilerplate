@@ -8,3 +8,4 @@ export * from "./ThemeProvider";
 export * from "./Button";
 export * from "./IconButton";
 export * from "./Radio";
+export * from "./Checkbox";
