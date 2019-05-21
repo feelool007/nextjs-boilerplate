@@ -91,24 +91,24 @@ class Content extends React.Component<PContent, SContent> {
             Checkboxes
           </Typography>
           <FormGroup row className={classes.controlsContainer}>
-            <Checkbox checked value="default" color="default" label="DEFAULT" />
-            <Checkbox checked value="primary" color="primary" label="PRIMARY" />
-            <Checkbox checked value="secondary" color="secondary" label="SECONDARY" />
-            <Checkbox checked value="success" color="success" label="SUCCESS" />
-            <Checkbox checked value="warning" color="warning" label="WARNING" />
-            <Checkbox checked value="danger" color="danger" label="DANGER" />
+            <Checkbox value="default" color="default" label="DEFAULT" />
+            <Checkbox value="primary" color="primary" label="PRIMARY" />
+            <Checkbox value="secondary" color="secondary" label="SECONDARY" />
+            <Checkbox value="success" color="success" label="SUCCESS" />
+            <Checkbox value="warning" color="warning" label="WARNING" />
+            <Checkbox value="danger" color="danger" label="DANGER" />
           </FormGroup>
           <Divider className={classes.divider} />
           <Typography variant="h5" className={classes.title}>
             Custom checkboxes
           </Typography>
           <FormGroup row className={classes.controlsContainer}>
-            <Checkbox checked value="default" color="default" label="DEFAULT" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-            <Checkbox checked value="primary" color="primary" label="PRIMARY" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-            <Checkbox checked value="secondary" color="secondary" label="SECONDARY" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-            <Checkbox checked value="success" color="success" label="SUCCESS" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-            <Checkbox checked value="warning" color="warning" label="WARNING" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-            <Checkbox checked value="danger" color="danger" label="DANGER" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            <Checkbox value="default" color="default" label="DEFAULT" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            <Checkbox value="primary" color="primary" label="PRIMARY" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            <Checkbox value="secondary" color="secondary" label="SECONDARY" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            <Checkbox value="success" color="success" label="SUCCESS" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            <Checkbox value="warning" color="warning" label="WARNING" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            <Checkbox value="danger" color="danger" label="DANGER" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
           </FormGroup>
           <Divider className={classes.divider} />
         </Paper>
