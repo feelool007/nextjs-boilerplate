@@ -14,7 +14,7 @@ import {
 import { RadioGroupProps } from "@material-ui/core/RadioGroup";
 import { CheckCircle, RadioButtonUnchecked, Favorite, FavoriteBorder } from "@material-ui/icons";
 
-import { Radio, Checkbox } from "../src/components";
+import { Radio, Checkbox, Input, PInput } from "../src/components";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -43,30 +43,37 @@ interface PContent extends WithStyles<typeof styles> {}
 
 interface SContent {
   radioValue: string;
+  inputValue: PInput["value"];
 }
 
 class Content extends React.Component<PContent, SContent> {
   constructor(props: PContent) {
     super(props);
     this.state = {
-      radioValue: "default"
+      radioValue: "default",
+      inputValue: ""
     };
   }
 
-  handleChange: RadioGroupProps["onChange"] = (_, value) => {
+  handleChangeRadio: RadioGroupProps["onChange"] = (_, value) => {
     this.setState({ radioValue: value });
+  };
+
+  handleChangeInput: PInput["onChange"] = event => {
+    const { value } = event.target;
+    this.setState({ inputValue: value });
   };
 
   render = () => {
     const { classes } = this.props;
-    const { radioValue } = this.state;
+    const { radioValue, inputValue } = this.state;
     return (
       <Grid container direction="column" alignItems="center">
         <Paper className={classes.root}>
           <Typography variant="h5" className={classes.title}>
             Radio buttons
           </Typography>
-          <RadioGroup row value={radioValue} onChange={this.handleChange} className={classes.controlsContainer}>
+          <RadioGroup row value={radioValue} onChange={this.handleChangeRadio} className={classes.controlsContainer}>
             <Radio value="default" color="default" label="DEFAULT" />
             <Radio value="primary" color="primary" label="PRIMARY" />
             <Radio value="secondary" color="secondary" label="SECONDARY" />
@@ -78,7 +85,7 @@ class Content extends React.Component<PContent, SContent> {
           <Typography variant="h5" className={classes.title}>
             Customed radio buttons
           </Typography>
-          <RadioGroup row value={radioValue} onChange={this.handleChange} className={classes.controlsContainer}>
+          <RadioGroup row value={radioValue} onChange={this.handleChangeRadio} className={classes.controlsContainer}>
             <Radio value="default" color="default" label="DEFAULT" icon={<RadioButtonUnchecked />} checkedIcon={<CheckCircle />} />
             <Radio value="primary" color="primary" label="PRIMARY" icon={<RadioButtonUnchecked />} checkedIcon={<CheckCircle />}/>
             <Radio value="secondary" color="secondary" label="SECONDARY" icon={<RadioButtonUnchecked />} checkedIcon={<CheckCircle />} />
@@ -110,6 +117,11 @@ class Content extends React.Component<PContent, SContent> {
             <Checkbox value="warning" color="warning" label="WARNING" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
             <Checkbox value="danger" color="danger" label="DANGER" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
           </FormGroup>
+          <Divider className={classes.divider} />
+          <Typography variant="h5" className={classes.title}>
+            Input
+          </Typography>
+          <Input fullWidth required color="secondary" label="Normal input" value={inputValue} onChange={this.handleChangeInput} />
           <Divider className={classes.divider} />
         </Paper>
       </Grid>
