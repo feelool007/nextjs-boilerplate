@@ -31,7 +31,13 @@ class Input extends React.Component<PInput> {
     } = this.props;
     return (
       <ThemeProvider color={color}>
-        <FormControl fullWidth={fullWidth} required={required} error={error} className={classes.root} {...FormControlProps}>
+        <FormControl
+          fullWidth={fullWidth}
+          required={required}
+          error={error}
+          className={classes.root}
+          {...FormControlProps}
+        >
           <InputLabel {...InputLabelProps}>{label}</InputLabel>
           <MuiInput value={value} {...InputProps} />
           {helperText && <FormHelperText {...FormHelperTextProps}>{helperText}</FormHelperText>}

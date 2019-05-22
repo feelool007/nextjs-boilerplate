@@ -14,7 +14,7 @@ import {
 import { RadioGroupProps } from "@material-ui/core/RadioGroup";
 import { CheckCircle, RadioButtonUnchecked, Favorite, FavoriteBorder } from "@material-ui/icons";
 
-import { Radio, Checkbox, Input, PInput } from "../src/components";
+import { Radio, Checkbox } from "../src/components";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -43,7 +43,6 @@ interface PContent extends WithStyles<typeof styles> {}
 
 interface SContent {
   radioValue: string;
-  inputValue: PInput["value"];
 }
 
 class Content extends React.Component<PContent, SContent> {
@@ -51,7 +50,6 @@ class Content extends React.Component<PContent, SContent> {
     super(props);
     this.state = {
       radioValue: "default",
-      inputValue: ""
     };
   }
 
@@ -59,14 +57,9 @@ class Content extends React.Component<PContent, SContent> {
     this.setState({ radioValue: value });
   };
 
-  handleChangeInput: PInput["onChange"] = event => {
-    const { value } = event.target;
-    this.setState({ inputValue: value });
-  };
-
   render = () => {
     const { classes } = this.props;
-    const { radioValue, inputValue } = this.state;
+    const { radioValue } = this.state;
     return (
       <Grid container direction="column" alignItems="center">
         <Paper className={classes.root}>
@@ -86,12 +79,48 @@ class Content extends React.Component<PContent, SContent> {
             Customed radio buttons
           </Typography>
           <RadioGroup row value={radioValue} onChange={this.handleChangeRadio} className={classes.controlsContainer}>
-            <Radio value="default" color="default" label="DEFAULT" icon={<RadioButtonUnchecked />} checkedIcon={<CheckCircle />} />
-            <Radio value="primary" color="primary" label="PRIMARY" icon={<RadioButtonUnchecked />} checkedIcon={<CheckCircle />}/>
-            <Radio value="secondary" color="secondary" label="SECONDARY" icon={<RadioButtonUnchecked />} checkedIcon={<CheckCircle />} />
-            <Radio value="success" color="success" label="SUCCESS" icon={<RadioButtonUnchecked />} checkedIcon={<CheckCircle />} />
-            <Radio value="warning" color="warning" label="WARNING" icon={<RadioButtonUnchecked />} checkedIcon={<CheckCircle />} />
-            <Radio value="danger" color="danger" label="DANGER" icon={<RadioButtonUnchecked />} checkedIcon={<CheckCircle />} />
+            <Radio
+              value="default"
+              color="default"
+              label="DEFAULT"
+              icon={<RadioButtonUnchecked />}
+              checkedIcon={<CheckCircle />}
+            />
+            <Radio
+              value="primary"
+              color="primary"
+              label="PRIMARY"
+              icon={<RadioButtonUnchecked />}
+              checkedIcon={<CheckCircle />}
+            />
+            <Radio
+              value="secondary"
+              color="secondary"
+              label="SECONDARY"
+              icon={<RadioButtonUnchecked />}
+              checkedIcon={<CheckCircle />}
+            />
+            <Radio
+              value="success"
+              color="success"
+              label="SUCCESS"
+              icon={<RadioButtonUnchecked />}
+              checkedIcon={<CheckCircle />}
+            />
+            <Radio
+              value="warning"
+              color="warning"
+              label="WARNING"
+              icon={<RadioButtonUnchecked />}
+              checkedIcon={<CheckCircle />}
+            />
+            <Radio
+              value="danger"
+              color="danger"
+              label="DANGER"
+              icon={<RadioButtonUnchecked />}
+              checkedIcon={<CheckCircle />}
+            />
           </RadioGroup>
           <Divider className={classes.divider} />
           <Typography variant="h5" className={classes.title}>
@@ -110,18 +139,49 @@ class Content extends React.Component<PContent, SContent> {
             Custom checkboxes
           </Typography>
           <FormGroup row className={classes.controlsContainer}>
-            <Checkbox value="default" color="default" label="DEFAULT" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-            <Checkbox value="primary" color="primary" label="PRIMARY" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-            <Checkbox value="secondary" color="secondary" label="SECONDARY" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-            <Checkbox value="success" color="success" label="SUCCESS" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-            <Checkbox value="warning" color="warning" label="WARNING" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-            <Checkbox value="danger" color="danger" label="DANGER" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            <Checkbox
+              value="default"
+              color="default"
+              label="DEFAULT"
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+            />
+            <Checkbox
+              value="primary"
+              color="primary"
+              label="PRIMARY"
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+            />
+            <Checkbox
+              value="secondary"
+              color="secondary"
+              label="SECONDARY"
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+            />
+            <Checkbox
+              value="success"
+              color="success"
+              label="SUCCESS"
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+            />
+            <Checkbox
+              value="warning"
+              color="warning"
+              label="WARNING"
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+            />
+            <Checkbox
+              value="danger"
+              color="danger"
+              label="DANGER"
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+            />
           </FormGroup>
-          <Divider className={classes.divider} />
-          <Typography variant="h5" className={classes.title}>
-            Input
-          </Typography>
-          <Input fullWidth required color="secondary" label="Normal input" value={inputValue} onChange={this.handleChangeInput} />
           <Divider className={classes.divider} />
         </Paper>
       </Grid>
