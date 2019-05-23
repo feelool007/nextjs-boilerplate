@@ -3,6 +3,7 @@ import { withStyles, Select, MenuItem } from "@material-ui/core";
 
 import { PSelectMulti, SelectOption } from "./types";
 import { selectStyles } from "./styles";
+import SelectSearch from "./SelectSearch";
 import { Checkbox } from "../Checkbox";
 
 class SelectMulti extends React.Component<PSelectMulti> {
@@ -20,9 +21,12 @@ class SelectMulti extends React.Component<PSelectMulti> {
   };
 
   render = () => {
-    const { options, classes, ...SelectProps } = this.props;
+    const { options, search, searchValue, onSearchChange, onSearchClear, classes, ...SelectProps } = this.props;
     return (
       <Select renderValue={this.getRenderValue} {...SelectProps}>
+        {search && (
+          <SelectSearch searchValue={searchValue} onSearchChange={onSearchChange} onSearchClear={onSearchClear} />
+        )}
         {options.map((d, index) => {
           return (
             <MenuItem

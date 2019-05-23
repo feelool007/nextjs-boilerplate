@@ -16,5 +16,19 @@ export const selectStyles = (theme: Theme) => createStyles({
   },
   menuItemHighlightMulti: {
     backgroundColor: "#FFFFFF !important"
+  },
+  icon: {
+    color: "grey"
+  },
+  iconSearch: {
+    marginRight: theme.spacing.unit * 1.5
+  },
+  iconClear: {
+    cursor: "pointer"
+  },
+  searchContainer: {
+    paddingLeft: theme.spacing.unit * 2.5,
+    paddingRight: theme.spacing.unit * 2.5,
+    marginBottom: theme.spacing.unit * 0.5
   }
 });

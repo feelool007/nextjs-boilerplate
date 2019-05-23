@@ -3,6 +3,7 @@ import { withStyles, Select, MenuItem } from "@material-ui/core";
 
 import { PSelectSingle, SelectOption } from "./types";
 import { selectStyles } from "./styles";
+import SelectSearch from "./SelectSearch";
 
 class SelectSingle extends React.Component<PSelectSingle> {
   isSelected = (optionValue: SelectOption["value"]): boolean => {
@@ -11,9 +12,12 @@ class SelectSingle extends React.Component<PSelectSingle> {
   };
 
   render = () => {
-    const { options, classes, ...SelectProps } = this.props;
+    const { options, search, searchValue, onSearchChange, onSearchClear, classes, ...SelectProps } = this.props;
     return (
       <Select {...SelectProps}>
+        {search && (
+          <SelectSearch searchValue={searchValue} onSearchChange={onSearchChange} onSearchClear={onSearchClear} />
+        )}
         {options.map((d, index) => {
           return (
             <MenuItem

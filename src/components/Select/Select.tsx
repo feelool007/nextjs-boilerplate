@@ -1,13 +1,13 @@
 import React from "react";
 import { withStyles, FormControl, InputLabel, FormHelperText } from "@material-ui/core";
 
-import { PSelect } from "./types";
+import { PSelect, SSelect, ChangeEventHandler } from "./types";
 import { selectStyles } from "./styles";
 import SelectSingle from "./SelectSingle";
 import SelectMulti from "./SelectMulti";
 import { ThemeProvider } from "../ThemeProvider";
 
-class Select extends React.Component<PSelect> {
+class Select extends React.Component<PSelect, SSelect> {
   static defaultProps = {
     color: "default",
     options: [],
@@ -16,11 +16,39 @@ class Select extends React.Component<PSelect> {
     helperText: "",
     required: false,
     error: false,
-    fullWidth: false
+    fullWidth: false,
+    search: true
+  };
+
+  constructor(props: PSelect) {
+    super(props);
+    this.state = {
+      searchValue: ""
+    };
+  }
+
+  handleSearchChange: ChangeEventHandler = event => {
+    const { value } = event.target;
+    this.setState({ searchValue: value });
+  };
+
+  handleSearchClear = () => {
+    this.setState({ searchValue: "" });
+  };
+
+  getOptions = () => {
+    const { options } = this.props;
+    const { searchValue } = this.state;
+    if (!Boolean(searchValue)) {
+      return options;
+    } else {
+      return options.filter(d => d.label.includes(searchValue));
+    }
   };
 
   render = () => {
     const {
+      options: allOptions,
       color,
       multiple,
       label,
@@ -34,6 +62,8 @@ class Select extends React.Component<PSelect> {
       classes,
       ...SelectProps
     } = this.props;
+    const { searchValue } = this.state;
+    const options = this.getOptions();
     return (
       <ThemeProvider color={color}>
         <FormControl
@@ -47,9 +77,9 @@ class Select extends React.Component<PSelect> {
             {label}
           </InputLabel>
           {multiple ? (
-            <SelectMulti multiple={true} {...SelectProps} />
+            <SelectMulti multiple={true} searchValue={searchValue} options={options} onSearchChange={this.handleSearchChange} onSearchClear={this.handleSearchClear} {...SelectProps} />
           ) : (
-            <SelectSingle multiple={false} {...SelectProps} />
+            <SelectSingle multiple={false} searchValue={searchValue} options={options} onSearchChange={this.handleSearchChange} onSearchClear={this.handleSearchClear} {...SelectProps} />
           )}
           {helperText && <FormHelperText {...FormHelperText}>{helperText}</FormHelperText>}
         </FormControl>
