@@ -4,6 +4,9 @@ export const selectStyles = (theme: Theme) => createStyles({
   root: {
     margin: theme.spacing.unit * 0
   },
+  menu: {
+    maxHeight: 435
+  },
   menuItem: {
     margin: theme.spacing.unit * 0.5,
     "&:hover": {

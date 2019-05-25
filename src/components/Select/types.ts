@@ -20,7 +20,7 @@ export interface SelectOption {
 
 export interface PSelectBase extends Omit<SelectProps, "color" | "classes">, WithStyles<typeof selectStyles> {
   options: Array<SelectOption>;
-  search: boolean;
+  search?: boolean;
   all?: boolean;
   allLabel?: SelectOptionLabel;
   allValue?: SelectOptionValue;
@@ -49,4 +49,20 @@ export interface PSelect extends PSelectBase, PThemeProvider {
 
 export interface SSelect {
   searchValue: string;
+}
+
+export interface DynamicSelectFilters {
+  [key: string]: SelectOptionValue;
+}
+
+export interface PDynamicSelect extends Omit<PSelect, "options" | "classes"> {
+  data: Array<any>;
+  valueColumn: string;
+  labelColumn?: string;
+  filters?: DynamicSelectFilters;
+  onChangeByFilter: (event: { target: { name?: string; value: SelectOptionValue } }) => void;
+}
+
+export interface SDynamicSelect {
+  options: Array<SelectOption>;
 }

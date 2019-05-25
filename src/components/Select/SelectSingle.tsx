@@ -25,7 +25,7 @@ class SelectSingle extends React.Component<PSelectSingle> {
       ...SelectProps
     } = this.props;
     return (
-      <Select {...SelectProps}>
+      <Select MenuProps={{ className: classes.menu }} {...SelectProps}>
         {search && (
           <SelectSearch searchValue={searchValue} onSearchChange={onSearchChange} onSearchClear={onSearchClear} />
         )}

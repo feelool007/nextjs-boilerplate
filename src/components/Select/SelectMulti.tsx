@@ -62,7 +62,12 @@ class SelectMulti extends React.Component<PSelectMulti> {
       ...SelectProps
     } = this.props;
     return (
-      <Select renderValue={this.getRenderValue} {...SelectProps} onChange={this.handleChange}>
+      <Select
+        renderValue={this.getRenderValue}
+        MenuProps={{ className: classes.menu }}
+        {...SelectProps}
+        onChange={this.handleChange}
+      >
         {search && (
           <SelectSearch searchValue={searchValue} onSearchChange={onSearchChange} onSearchClear={onSearchClear} />
         )}
