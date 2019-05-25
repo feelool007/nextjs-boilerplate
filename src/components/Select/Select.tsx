@@ -1,7 +1,7 @@
 import React from "react";
 import { withStyles, FormControl, InputLabel, FormHelperText } from "@material-ui/core";
 
-import { PSelect, SSelect, ChangeEventHandler } from "./types";
+import { PSelect, SSelect, ChangeEventHandler, SelectOption } from "./types";
 import { selectStyles } from "./styles";
 import SelectSingle from "./SelectSingle";
 import SelectMulti from "./SelectMulti";
@@ -17,7 +17,10 @@ class Select extends React.Component<PSelect, SSelect> {
     required: false,
     error: false,
     fullWidth: false,
-    search: true
+    search: true,
+    all: false,
+    allValue: "all",
+    allLabel: "All"
   };
 
   constructor(props: PSelect) {
@@ -37,13 +40,18 @@ class Select extends React.Component<PSelect, SSelect> {
   };
 
   getOptions = () => {
-    const { options } = this.props;
+    const { all, allValue, allLabel } = this.props;
     const { searchValue } = this.state;
+    let options: Array<SelectOption>;
     if (!Boolean(searchValue)) {
-      return options;
+      options = this.props.options;
     } else {
-      return options.filter(d => d.label.includes(searchValue));
+      options = this.props.options.filter(d => d.label.includes(searchValue));
     }
+    if (all) {
+      options = ([{ value: allValue, label: allLabel } as SelectOption]).concat(options)
+    }
+    return options;
   };
 
   render = () => {

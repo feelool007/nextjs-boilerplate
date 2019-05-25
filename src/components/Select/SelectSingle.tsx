@@ -12,7 +12,18 @@ class SelectSingle extends React.Component<PSelectSingle> {
   };
 
   render = () => {
-    const { options, search, searchValue, onSearchChange, onSearchClear, classes, ...SelectProps } = this.props;
+    const {
+      options,
+      search,
+      searchValue,
+      onSearchChange,
+      onSearchClear,
+      classes,
+      all,
+      allValue,
+      allLabel,
+      ...SelectProps
+    } = this.props;
     return (
       <Select {...SelectProps}>
         {search && (

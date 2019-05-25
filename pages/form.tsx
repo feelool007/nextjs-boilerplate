@@ -120,6 +120,7 @@ class Content extends React.Component<PContent, SContent> {
                 Selection form
               </Typography>
               <Select
+                all
                 name="gender"
                 fullWidth
                 options={[{ value: "Male", label: "Male" }, { value: "Female", label: "Female" }]}
@@ -132,6 +133,7 @@ class Content extends React.Component<PContent, SContent> {
                 }}
               />
               <Select
+                all
                 fullWidth
                 multiple
                 name="cities"

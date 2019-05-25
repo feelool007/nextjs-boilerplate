@@ -9,14 +9,21 @@ import { PThemeProvider } from "../ThemeProvider";
 
 export type ChangeEventHandler = React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement>;
 
+export type SelectOptionValue = string | number | Array<string>;
+
+export type SelectOptionLabel = string;
+
 export interface SelectOption {
-  value: string | number | Array<string>;
-  label: string;
+  value: SelectOptionValue;
+  label: SelectOptionLabel;
 }
 
 export interface PSelectBase extends Omit<SelectProps, "color" | "classes">, WithStyles<typeof selectStyles> {
   options: Array<SelectOption>;
   search: boolean;
+  all?: boolean;
+  allLabel?: SelectOptionLabel;
+  allValue?: SelectOptionValue;
 }
 
 export interface PSelectSearch extends WithStyles<typeof selectStyles> {
