@@ -20,17 +20,17 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       width: "85%",
-      padding: theme.spacing.unit * 2,
+      padding: theme.spacing(2),
       [theme.breakpoints.down("md")]: {
         width: "100%"
       }
     },
     divider: {
-      marginTop: theme.spacing.unit * 2,
-      marginBottom: theme.spacing.unit * 2
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2)
     },
     title: {
-      marginBottom: theme.spacing.unit * 1.5,
+      marginBottom: theme.spacing(1.5),
       color: "grey"
     },
     controlsContainer: {

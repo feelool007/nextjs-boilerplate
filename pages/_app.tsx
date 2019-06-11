@@ -1,21 +1,13 @@
 import React from "react";
 import App, { Container } from "next/app";
 import Head from "next/head";
-import { CssBaseline, MuiThemeProvider } from "@material-ui/core";
-import JssProvider from "react-jss/lib/JssProvider";
+import { CssBaseline } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/styles";
 
-import getPageContext, { PageContext } from "../src/utils/getPageContext";
+import theme from "../src/utils/theme";
 import { Layout } from "../src/components/Layout";
 
 class MyApp extends App {
-  private pageContext: PageContext;
-
-  constructor() {
-    //@ts-ignore
-    super();
-    this.pageContext = getPageContext();
-  }
-
   componentDidMount = () => {
     // remove server side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
@@ -31,20 +23,12 @@ class MyApp extends App {
         <Head>
           <title>NextJS App</title>
         </Head>
-        <JssProvider
-          registry={this.pageContext.sheetsRegistry}
-          generateClassName={this.pageContext.generateClassName}
-        >
-          <MuiThemeProvider
-            theme={this.pageContext.theme}
-            sheetsManager={this.pageContext.sheetsManager}
-          >
+          <ThemeProvider theme={theme}>
             <CssBaseline />
             <Layout>
-              <Component pageContext={this.pageContext} {...pageProps} />
+              <Component {...pageProps} />
             </Layout>
-          </MuiThemeProvider>
-        </JssProvider>
+          </ThemeProvider>
       </Container>
     );
   };

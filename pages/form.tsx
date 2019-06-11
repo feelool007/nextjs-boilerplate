@@ -8,22 +8,22 @@ import { Input, Select, Button, Checkbox, DynamicSelect, DatePicker } from "../s
 const styles = (theme: Theme) =>
   createStyles({
     formContainer: {
-      padding: theme.spacing.unit * 2,
+      padding: theme.spacing(2),
       height: "100%"
     },
     formControl: {
-      marginBottom: theme.spacing.unit * 2
+      marginBottom: theme.spacing(2)
     },
     divider: {
-      marginTop: theme.spacing.unit * 2,
-      marginBottom: theme.spacing.unit * 2
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2)
     },
     title: {
-      marginBottom: theme.spacing.unit * 1.5,
+      marginBottom: theme.spacing(1.5),
       color: "grey"
     },
     adornment: {
-      marginRight: theme.spacing.unit * 1.5
+      marginRight: theme.spacing(1.5)
     }
   });
 
@@ -41,7 +41,7 @@ const data = [
   { gender: "Male", age: "10-20", name: "Marshall" }
 ];
 
-type ChangeEventHandler = React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement>;
+type ChangeEventHandler = React.ChangeEventHandler<{ name?: string, value: unknown }>;
 
 interface PContent extends WithStyles<typeof styles> {}
 
@@ -76,7 +76,7 @@ class Content extends React.Component<PContent, SContent> {
 
   handleChange: ChangeEventHandler = event => {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    this.setState({ [name!]: value });
   };
 
   handleDateChange = (name: string) => (date: Date) => {
@@ -88,7 +88,7 @@ class Content extends React.Component<PContent, SContent> {
     const { account, password, gender, cities, dGender, dAge, dName, selectedDate, selectedDateTime } = this.state;
     return (
       <Grid container direction="column">
-        <Grid container spacing={16} style={{ marginBottom: 16 }}>
+        <Grid container spacing={2} style={{ marginBottom: 16 }}>
           <Grid item xs={6}>
             <Paper className={classes.formContainer}>
               <Typography variant="h5" className={classes.title}>
@@ -178,7 +178,7 @@ class Content extends React.Component<PContent, SContent> {
             </Paper>
           </Grid>
         </Grid>
-        <Grid container spacing={16}>
+        <Grid container spacing={2}>
           <Grid item xs={6}>
             <Paper className={classes.formContainer}>
               <Typography variant="h5" className={classes.title}>

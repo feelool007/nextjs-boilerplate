@@ -48,13 +48,16 @@ class DynamicSelect extends React.Component<PDynamicSelect, SDynamicSelect> {
 
     // manually dispatch change event if previous value is not in new options.
     if (!optionValues.includes(value)) {
-      const newValue = optionValues[0];
-      const event = new Event("change");
-      const elem = this.__ref.current!.node;
-      elem.addEventListener("change", onChange!, false);
-      elem.name = name!;
-      elem.value = newValue;
-      elem.dispatchEvent(event)
+      const newValue: string | number = optionValues[0];
+      onChange!(
+        {
+          target: {
+            name,
+            value: newValue
+          }
+        },
+        null
+      );
     }
 
     // sorting, keep options' order consistent.
@@ -86,7 +89,7 @@ class DynamicSelect extends React.Component<PDynamicSelect, SDynamicSelect> {
   render = () => {
     const { data, filters, valueColumn, labelColumn, ...SelectProps } = this.props;
     const { options } = this.state;
-    return <Select inputRef={this.__ref} {...SelectProps} options={options} multiple={false} />;
+    return <Select ref={this.__ref} {...SelectProps} options={options} multiple={false} />;
   };
 }
 

@@ -41,8 +41,8 @@ export const sidebarStyles = (theme: Theme) => createStyles({
   popperMenu: {
     backgroundColor: "#424242",
     width: 260,
-    paddingTop: theme.spacing.unit * 1,
-    paddingBottom: theme.spacing.unit * 1,
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
   },
   menuOpen: {
     color: "white"
@@ -51,13 +51,13 @@ export const sidebarStyles = (theme: Theme) => createStyles({
     color: "rgb(185, 185, 185)"
   },
   menuText: {
-    marginLeft: theme.spacing.unit * 2
+    marginLeft: theme.spacing(2)
   },
   menuItem: {
     height: 40,
     width: "85%",
     borderRadius: 8,
-    marginLeft: theme.spacing.unit * 1.5,
+    marginLeft: theme.spacing(1.5),
     "&:hover": {
       backgroundColor: "#424242"
     }

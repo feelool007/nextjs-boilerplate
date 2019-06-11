@@ -9,7 +9,7 @@ export const footerStyles = (theme: Theme) => createStyles({
   },
   copyrightIcon: {
     fontSize: 18,
-    marginRight: theme.spacing.unit * 1,
+    marginRight: theme.spacing(1),
     color: "#757575"
   },
   copyrightContent: {

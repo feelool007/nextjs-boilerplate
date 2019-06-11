@@ -14,7 +14,7 @@ class SelectMulti extends React.Component<PSelectMulti> {
 
   handleChange: SelectProps["onChange"] = (event, child) => {
     const { onChange, all, allValue } = this.props;
-    const { value } = event.target;
+    const value = (event.target.value as Array<any>);
     if (all && value[value.length - 1] === allValue) {
       if (this.isCheckedAll()) {
         event.target.value = [];

@@ -1,58 +1,41 @@
 import React from "react";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+import { createMuiTheme } from "@material-ui/core";
+import { ThemeProvider as MuiThemeProvider } from "@material-ui/styles";
 import { cyan, purple, green, orange, red, grey } from "@material-ui/core/colors";
 
 import { PThemeProvider, ThemeColors } from "./types";
 
 const themePrimary = createMuiTheme({
-  typography: {
-    useNextVariants: true
-  },
   palette: {
     primary: cyan
   }
 })
 
 const themeSecondary = createMuiTheme({
-  typography: {
-    useNextVariants: true
-  },
   palette: {
     primary: purple
   }
 })
 
 const themeSuccess = createMuiTheme({
-  typography: {
-    useNextVariants: true
-  },
   palette: {
     primary: green
   }
 })
 
 const themeWarning = createMuiTheme({
-  typography: {
-    useNextVariants: true
-  },
   palette: {
     primary: orange
   }
 })
 
 const themeDanger = createMuiTheme({
-  typography: {
-    useNextVariants: true
-  },
   palette: {
     primary: red
   }
 })
 
 const themeDefault = createMuiTheme({
-  typography: {
-    useNextVariants: true
-  },
   palette: {
     primary: grey
   }

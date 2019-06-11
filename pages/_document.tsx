@@ -1,21 +1,12 @@
-import React, { ComponentType } from "react";
-import Document, { Head, Main, NextScript, AnyPageProps } from "next/document";
+import React from "react";
+import Document, { Head, Main, NextScript } from "next/document";
+import { ServerStyleSheets } from "@material-ui/styles";
 import flush from "styled-jsx/server";
 
-import { PageContext } from "../src/utils/getPageContext";
+import theme from "../src/utils/theme";
 
-interface PDocument {
-  pageContext: PageContext
-}
-
-class MyDocument extends Document<PDocument> {
+class MyDocument extends Document {
   render = () => {
-    const { pageContext } = this.props;
-    const theme =
-      typeof pageContext.theme === "function"
-        ? pageContext.theme(null)
-        : pageContext.theme;
-
     return (
       <html lang="zh-TW">
         <Head>
@@ -39,37 +30,50 @@ class MyDocument extends Document<PDocument> {
   };
 }
 
-interface PPageWithPageContext extends AnyPageProps {
-  pageContext: PageContext
-}
+MyDocument.getInitialProps = async ctx => {
+  // Resolution order
+  //
+  // On the server:
+  // 1. app.getInitialProps
+  // 2. page.getInitialProps
+  // 3. document.getInitialProps
+  // 4. app.render
+  // 5. page.render
+  // 6. document.render
+  //
+  // On the server with error:
+  // 1. document.getInitialProps
+  // 2. app.render
+  // 3. page.render
+  // 4. document.render
+  //
+  // On the client
+  // 1. app.getInitialProps
+  // 2. page.getInitialProps
+  // 3. app.render
+  // 4. page.render
 
-MyDocument.getInitialProps = ctx => {
-  let pageContext: PageContext | undefined;
+  // Render app and page and get the context of the page with collected side effects.
+  const sheets = new ServerStyleSheets();
+  const originalRenderPage = ctx.renderPage;
 
-  const page = ctx.renderPage((Component: ComponentType<PPageWithPageContext>) => {
-    const WrappedComponent: ComponentType<PPageWithPageContext> = props => {
-      pageContext = props.pageContext;
-      return <Component {...props} />;
-    }
+  ctx.renderPage = () =>
+    originalRenderPage({
+      enhanceApp: App => props => sheets.collect(<App {...props} />),
+    });
 
-    return WrappedComponent;
-  })
-
-  let css: string | undefined;
-  if (pageContext) {
-    css = pageContext.sheetsRegistry.toString();
-  }
+  const initialProps = await Document.getInitialProps(ctx);
 
   return {
-    ...page,
-    pageContext,
+    ...initialProps,
+    // Styles fragment is rendered after the app and page rendering finish.
     styles: (
       <React.Fragment>
-        <style id="jss-server-side">{css}</style>
+        {sheets.getStyleElement()}
         {flush() || null}
       </React.Fragment>
-    )
-  }
-}
+    ),
+  };
+};
 
 export default MyDocument;

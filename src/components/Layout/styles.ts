@@ -18,10 +18,10 @@ export const layoutStyles = (theme: Theme) => createStyles({
     overflowX: "auto"
   },
   container: {
-    marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2,
-    marginTop: theme.spacing.unit * 1,
-    marginBottom: theme.spacing.unit * 1,
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     position: "relative"
   },
   flex: {

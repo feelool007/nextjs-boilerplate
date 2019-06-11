@@ -22,13 +22,13 @@ export const errorPageStyles = (theme: Theme) => createStyles({
   statusCode: {
     fontSize: 40,
     margin: 0,
-    marginTop: theme.spacing.unit * 2,
+    marginTop: theme.spacing(2),
     color: "grey"
   },
   message: {
     fontSize: 30,
     margin: 0,
-    marginTop: theme.spacing.unit * 2,
+    marginTop: theme.spacing(2),
     color: "grey",
     whiteSpace: "pre-line"
   }

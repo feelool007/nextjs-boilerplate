@@ -13,6 +13,6 @@ export const headerStyles = (theme: Theme) => createStyles({
   menuToggler: {
     fontSize: 18,
     cursor: "pointer",
-    marginRight: theme.spacing.unit * 1.5
+    marginRight: theme.spacing(1.5)
   }
 })

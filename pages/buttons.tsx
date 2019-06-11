@@ -7,17 +7,17 @@ import { Button, IconButton } from "../src/components";
 const styles = (theme: Theme) => createStyles({
   root: {
     width: "85%",
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
     [theme.breakpoints.down("md")]: {
       width: "100%"
     }
   },
   divider: {
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 2
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2)
   },
   title: {
-    marginBottom: theme.spacing.unit * 1.5,
+    marginBottom: theme.spacing(1.5),
     color: "grey"
   }
 })
@@ -58,26 +58,6 @@ class Content extends React.Component<PContent> {
             <Button variant="text" color="success">SUCCESS</Button>
             <Button variant="text" color="warning">WARNING</Button>
             <Button variant="text" color="danger">DANGER</Button>
-          </Grid>
-          <Divider className={classes.divider} />
-          <Typography variant="h5" className={classes.title}>Fab button</Typography>
-          <Grid container justify="space-between">
-            <Button variant="fab" color="default"><Add /></Button>
-            <Button variant="fab" color="primary"><Add /></Button>
-            <Button variant="fab" color="secondary"><Add /></Button>
-            <Button variant="fab" color="success"><Add /></Button>
-            <Button variant="fab" color="warning"><Add /></Button>
-            <Button variant="fab" color="danger"><Add /></Button>
-          </Grid>
-          <Divider className={classes.divider} />
-          <Typography variant="h5" className={classes.title}>Extended fab button</Typography>
-          <Grid container justify="space-between">
-            <Button variant="extendedFab" color="default"><Add />DEFAULT</Button>
-            <Button variant="extendedFab" color="primary"><Add />PRIMARY</Button>
-            <Button variant="extendedFab" color="secondary"><Add />SECONDARY</Button>
-            <Button variant="extendedFab" color="success"><Add />SUCCESS</Button>
-            <Button variant="extendedFab" color="warning"><Add />WARNING</Button>
-            <Button variant="extendedFab" color="danger"><Add />DANGER</Button>
           </Grid>
           <Divider className={classes.divider} />
           <Typography variant="h5" className={classes.title}>Icon button</Typography>
