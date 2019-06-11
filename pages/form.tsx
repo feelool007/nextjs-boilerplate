@@ -3,7 +3,7 @@ import { withStyles, createStyles, Theme, WithStyles, Grid, Paper, Typography, D
 import { Lock, Person } from "@material-ui/icons";
 import Link from "next/link";
 
-import { Input, Select, Button, Checkbox, DynamicSelect, PDynamicSelect, DatePicker, PDatePicker } from "../src/components";
+import { Input, Select, Button, Checkbox, DynamicSelect, DatePicker } from "../src/components";
 
 const styles = (theme: Theme) =>
   createStyles({
