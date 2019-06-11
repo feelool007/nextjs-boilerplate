@@ -1,7 +1,7 @@
 import React from "react";
 import deepEqual from "lodash.isequal";
 
-import { PDynamicSelect, SDynamicSelect, SelectOption, DynamicSelectFilters } from "./types";
+import { PDynamicSelect, SDynamicSelect, SelectOption, SelectInputRef } from "./types";
 import Select from "./Select";
 
 class DynamicSelect extends React.Component<PDynamicSelect, SDynamicSelect> {
@@ -11,7 +11,7 @@ class DynamicSelect extends React.Component<PDynamicSelect, SDynamicSelect> {
     allValue: "all"
   };
 
-  private __ref = React.createRef<HTMLInputElement>();
+  private __ref = React.createRef<SelectInputRef>();
 
   constructor(props: PDynamicSelect) {
     super(props);
@@ -22,7 +22,7 @@ class DynamicSelect extends React.Component<PDynamicSelect, SDynamicSelect> {
 
   getOptions = () => {
     const { name, value, data, valueColumn, all, allValue, onChange } = this.props;
-    const filters = this.props.filters as DynamicSelectFilters;
+    const filters = this.props.filters!;
     const labelColumn = this.props.labelColumn || valueColumn;
     const keys = Object.keys(filters);
 
@@ -51,8 +51,8 @@ class DynamicSelect extends React.Component<PDynamicSelect, SDynamicSelect> {
       const newValue = optionValues[0];
       const event = new Event("change");
       const elem = this.__ref.current!.node;
-      elem.addEventListener("change", onChange, false);
-      elem.name = name;
+      elem.addEventListener("change", onChange!, false);
+      elem.name = name!;
       elem.value = newValue;
       elem.dispatchEvent(event)
     }

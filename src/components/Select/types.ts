@@ -13,6 +13,11 @@ export type SelectOptionValue = string | number | Array<string>;
 
 export type SelectOptionLabel = string;
 
+export interface SelectInputRef {
+  focus: () => void;
+  node: HTMLInputElement;
+}
+
 export interface SelectOption {
   value: SelectOptionValue;
   label: SelectOptionLabel;
