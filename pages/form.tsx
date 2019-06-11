@@ -3,7 +3,7 @@ import { withStyles, createStyles, Theme, WithStyles, Grid, Paper, Typography, D
 import { Lock, Person } from "@material-ui/icons";
 import Link from "next/link";
 
-import { Input, Select, Button, Checkbox, DynamicSelect, PDynamicSelect } from "../src/components";
+import { Input, Select, Button, Checkbox, DynamicSelect, PDynamicSelect, DatePicker, PDatePicker } from "../src/components";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -39,7 +39,7 @@ const data = [
   { gender: "Female", age: "20-30", name: "Wendy" },
   { gender: "Female", age: "30-40", name: "Alice" },
   { gender: "Male", age: "10-20", name: "Marshall" }
-]
+];
 
 type ChangeEventHandler = React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement>;
 
@@ -54,6 +54,8 @@ interface SContent {
   dGender: string;
   dAge: string;
   dName: string;
+  selectedDate: Date;
+  selectedDateTime: Date;
 }
 
 class Content extends React.Component<PContent, SContent> {
@@ -66,7 +68,9 @@ class Content extends React.Component<PContent, SContent> {
       cities: ["Taipei", "Tainan", "Kaoshiung"],
       dGender: "",
       dAge: "",
-      dName: ""
+      dName: "",
+      selectedDate: new Date(),
+      selectedDateTime: new Date()
     };
   }
 
@@ -80,9 +84,13 @@ class Content extends React.Component<PContent, SContent> {
     this.setState({ [name]: value });
   };
 
+  handleDateChange = (name: string) => (date: Date) => {
+    this.setState({ [name]: date });
+  };
+
   render = () => {
     const { classes } = this.props;
-    const { account, password, gender, cities, dGender, dAge, dName } = this.state;
+    const { account, password, gender, cities, dGender, dAge, dName, selectedDate, selectedDateTime } = this.state;
     return (
       <Grid container direction="column">
         <Grid container spacing={16} style={{ marginBottom: 16 }}>
@@ -226,6 +234,46 @@ class Content extends React.Component<PContent, SContent> {
                 FormControlProps={{
                   className: classes.formControl
                 }}
+              />
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper className={classes.formContainer}>
+              <Typography variant="h5" className={classes.title}>
+                Date picker
+              </Typography>
+              <Divider className={classes.divider} />
+              <DatePicker
+                color="secondary"
+                label="Date Picker"
+                selected={selectedDate}
+                FormControlProps={{
+                  fullWidth: true,
+                  className: classes.formControl
+                }}
+                onChange={this.handleDateChange("selectedDate")}
+              />
+              <DatePicker
+                showTimeSelect
+                color="secondary"
+                label="DateTime Picker"
+                selected={selectedDateTime}
+                dateFormat="yyyy-MM-dd HH:mm"
+                FormControlProps={{
+                  fullWidth: true,
+                  className: classes.formControl
+                }}
+                onChange={this.handleDateChange("selectedDateTime")}
+              />
+              <DatePicker
+                readOnly
+                selected={selectedDate}
+                color="secondary"
+                label="Readonly"
+                FormControlProps={{
+                  className: classes.formControl
+                }}
+                onChange={this.handleDateChange("selectedDate")}
               />
             </Paper>
           </Grid>

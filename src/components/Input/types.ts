@@ -9,9 +9,9 @@ import { inputStyles } from "./styles";
 
 export interface PInput extends PThemeProvider, Omit<InputProps, "color" | "classes">, WithStyles<typeof inputStyles> {
   label?: React.ReactNode;
-  value: InputProps["value"];
+  value?: InputProps["value"];
   helperText?: React.ReactNode;
-  fullWidth: boolean;
+  fullWidth?: boolean;
   required?: boolean;
   error?: boolean;
   FormControlProps?: FormControlProps;
