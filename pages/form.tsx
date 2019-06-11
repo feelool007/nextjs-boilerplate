@@ -79,11 +79,6 @@ class Content extends React.Component<PContent, SContent> {
     this.setState({ [name]: value });
   };
 
-  handleDynamicChange: PDynamicSelect["onChangeByFilter"] = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  };
-
   handleDateChange = (name: string) => (date: Date) => {
     this.setState({ [name]: date });
   };
@@ -198,7 +193,6 @@ class Content extends React.Component<PContent, SContent> {
                 valueColumn="gender"
                 color="secondary"
                 label="Choose gender"
-                onChangeByFilter={this.handleDynamicChange}
                 onChange={this.handleChange}
                 FormControlProps={{
                   className: classes.formControl
@@ -213,7 +207,6 @@ class Content extends React.Component<PContent, SContent> {
                 color="secondary"
                 label="Choose age"
                 filters={{ gender: dGender }}
-                onChangeByFilter={this.handleDynamicChange}
                 onChange={this.handleChange}
                 FormControlProps={{
                   className: classes.formControl
@@ -229,7 +222,6 @@ class Content extends React.Component<PContent, SContent> {
                 color="secondary"
                 label="Choose name"
                 filters={{ gender: dGender, age: dAge }}
-                onChangeByFilter={this.handleDynamicChange}
                 onChange={this.handleChange}
                 FormControlProps={{
                   className: classes.formControl

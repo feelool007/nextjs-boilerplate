@@ -60,7 +60,6 @@ export interface PDynamicSelect extends Omit<PSelect, "options" | "classes"> {
   valueColumn: string;
   labelColumn?: string;
   filters?: DynamicSelectFilters;
-  onChangeByFilter: (event: { target: { name?: string; value: SelectOptionValue } }) => void;
 }
 
 export interface SDynamicSelect {

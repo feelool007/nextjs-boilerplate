@@ -11,6 +11,8 @@ class DynamicSelect extends React.Component<PDynamicSelect, SDynamicSelect> {
     allValue: "all"
   };
 
+  private __ref = React.createRef<HTMLInputElement>();
+
   constructor(props: PDynamicSelect) {
     super(props);
     this.state = {
@@ -19,7 +21,7 @@ class DynamicSelect extends React.Component<PDynamicSelect, SDynamicSelect> {
   }
 
   getOptions = () => {
-    const { name, value, data, valueColumn, all, allValue, onChangeByFilter } = this.props;
+    const { name, value, data, valueColumn, all, allValue, onChange } = this.props;
     const filters = this.props.filters as DynamicSelectFilters;
     const labelColumn = this.props.labelColumn || valueColumn;
     const keys = Object.keys(filters);
@@ -44,10 +46,15 @@ class DynamicSelect extends React.Component<PDynamicSelect, SDynamicSelect> {
       }
     });
 
-    // change value if next options doesn't include prev value.
+    // manually dispatch change event if previous value is not in new options.
     if (!optionValues.includes(value)) {
       const newValue = optionValues[0];
-      onChangeByFilter({ target: { name, value: newValue } });
+      const event = new Event("change");
+      const elem = this.__ref.current!.node;
+      elem.addEventListener("change", onChange, false);
+      elem.name = name;
+      elem.value = newValue;
+      elem.dispatchEvent(event)
     }
 
     // sorting, keep options' order consistent.
@@ -77,9 +84,9 @@ class DynamicSelect extends React.Component<PDynamicSelect, SDynamicSelect> {
   };
 
   render = () => {
-    const { data, filters, valueColumn, labelColumn, onChangeByFilter, ...SelectProps } = this.props;
+    const { data, filters, valueColumn, labelColumn, ...SelectProps } = this.props;
     const { options } = this.state;
-    return <Select {...SelectProps} options={options} multiple={false} />;
+    return <Select inputRef={this.__ref} {...SelectProps} options={options} multiple={false} />;
   };
 }
 

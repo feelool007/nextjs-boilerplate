@@ -13,7 +13,7 @@ class SidebarMenu extends React.Component<PSidebarMenu, SSidebarMenu> {
     mini: false
   };
 
-  private __ref: React.RefObject<null>;
+  private __ref: React.RefObject<HTMLButtonElement>;
 
   constructor(props: PSidebarMenu) {
     super(props);
