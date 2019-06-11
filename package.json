@@ -12,8 +12,8 @@
   "author": "KLCho",
   "license": "MIT",
   "dependencies": {
-    "@material-ui/core": "^4.1.0",
-    "@material-ui/icons": "^4.1.0",
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
     "@zeit/next-css": "^1.0.1",
     "http-status": "^1.3.2",
     "jss": "^9.8.7",
