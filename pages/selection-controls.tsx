@@ -67,12 +67,12 @@ class Content extends React.Component<PContent, SContent> {
             Radio buttons
           </Typography>
           <RadioGroup row value={radioValue} onChange={this.handleChangeRadio} className={classes.controlsContainer}>
-            <Radio value="default" color="default" label="DEFAULT" />
-            <Radio value="primary" color="primary" label="PRIMARY" />
-            <Radio value="secondary" color="secondary" label="SECONDARY" />
-            <Radio value="success" color="success" label="SUCCESS" />
-            <Radio value="warning" color="warning" label="WARNING" />
-            <Radio value="danger" color="danger" label="DANGER" />
+            <Radio checked value="default" color="default" label="DEFAULT" />
+            <Radio checked value="primary" color="primary" label="PRIMARY" />
+            <Radio checked value="secondary" color="secondary" label="SECONDARY" />
+            <Radio checked value="success" color="success" label="SUCCESS" />
+            <Radio checked value="warning" color="warning" label="WARNING" />
+            <Radio checked value="danger" color="danger" label="DANGER" />
           </RadioGroup>
           <Divider className={classes.divider} />
           <Typography variant="h5" className={classes.title}>
@@ -80,6 +80,7 @@ class Content extends React.Component<PContent, SContent> {
           </Typography>
           <RadioGroup row value={radioValue} onChange={this.handleChangeRadio} className={classes.controlsContainer}>
             <Radio
+              checked
               value="default"
               color="default"
               label="DEFAULT"
@@ -87,6 +88,7 @@ class Content extends React.Component<PContent, SContent> {
               checkedIcon={<CheckCircle />}
             />
             <Radio
+              checked
               value="primary"
               color="primary"
               label="PRIMARY"
@@ -94,6 +96,7 @@ class Content extends React.Component<PContent, SContent> {
               checkedIcon={<CheckCircle />}
             />
             <Radio
+              checked
               value="secondary"
               color="secondary"
               label="SECONDARY"
@@ -101,6 +104,7 @@ class Content extends React.Component<PContent, SContent> {
               checkedIcon={<CheckCircle />}
             />
             <Radio
+              checked
               value="success"
               color="success"
               label="SUCCESS"
@@ -108,6 +112,7 @@ class Content extends React.Component<PContent, SContent> {
               checkedIcon={<CheckCircle />}
             />
             <Radio
+              checked
               value="warning"
               color="warning"
               label="WARNING"
@@ -115,6 +120,7 @@ class Content extends React.Component<PContent, SContent> {
               checkedIcon={<CheckCircle />}
             />
             <Radio
+              checked
               value="danger"
               color="danger"
               label="DANGER"
@@ -127,12 +133,12 @@ class Content extends React.Component<PContent, SContent> {
             Checkboxes
           </Typography>
           <FormGroup row className={classes.controlsContainer}>
-            <Checkbox value="default" color="default" label="DEFAULT" />
-            <Checkbox value="primary" color="primary" label="PRIMARY" />
-            <Checkbox value="secondary" color="secondary" label="SECONDARY" />
-            <Checkbox value="success" color="success" label="SUCCESS" />
-            <Checkbox value="warning" color="warning" label="WARNING" />
-            <Checkbox value="danger" color="danger" label="DANGER" />
+            <Checkbox checked value="default" color="default" label="DEFAULT" />
+            <Checkbox checked value="primary" color="primary" label="PRIMARY" />
+            <Checkbox checked value="secondary" color="secondary" label="SECONDARY" />
+            <Checkbox checked value="success" color="success" label="SUCCESS" />
+            <Checkbox checked value="warning" color="warning" label="WARNING" />
+            <Checkbox checked value="danger" color="danger" label="DANGER" />
           </FormGroup>
           <Divider className={classes.divider} />
           <Typography variant="h5" className={classes.title}>
@@ -140,6 +146,7 @@ class Content extends React.Component<PContent, SContent> {
           </Typography>
           <FormGroup row className={classes.controlsContainer}>
             <Checkbox
+              checked
               value="default"
               color="default"
               label="DEFAULT"
@@ -147,6 +154,7 @@ class Content extends React.Component<PContent, SContent> {
               checkedIcon={<Favorite />}
             />
             <Checkbox
+              checked
               value="primary"
               color="primary"
               label="PRIMARY"
@@ -154,6 +162,7 @@ class Content extends React.Component<PContent, SContent> {
               checkedIcon={<Favorite />}
             />
             <Checkbox
+              checked
               value="secondary"
               color="secondary"
               label="SECONDARY"
@@ -161,6 +170,7 @@ class Content extends React.Component<PContent, SContent> {
               checkedIcon={<Favorite />}
             />
             <Checkbox
+              checked
               value="success"
               color="success"
               label="SUCCESS"
@@ -168,6 +178,7 @@ class Content extends React.Component<PContent, SContent> {
               checkedIcon={<Favorite />}
             />
             <Checkbox
+              checked
               value="warning"
               color="warning"
               label="WARNING"
@@ -175,6 +186,7 @@ class Content extends React.Component<PContent, SContent> {
               checkedIcon={<Favorite />}
             />
             <Checkbox
+              checked
               value="danger"
               color="danger"
               label="DANGER"
@@ -182,7 +194,6 @@ class Content extends React.Component<PContent, SContent> {
               checkedIcon={<Favorite />}
             />
           </FormGroup>
-          <Divider className={classes.divider} />
         </Paper>
       </Grid>
     );

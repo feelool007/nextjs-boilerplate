@@ -2,7 +2,7 @@ import React from "react";
 import { createStyles, Theme, WithStyles, withStyles, Grid, Paper, Typography, Divider } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 
-import { Button, IconButton } from "../src/components";
+import { Button, Fab, IconButton } from "../src/components";
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -60,6 +60,26 @@ class Content extends React.Component<PContent> {
             <Button variant="text" color="danger">DANGER</Button>
           </Grid>
           <Divider className={classes.divider} />
+          <Typography variant="h5" className={classes.title}>Fab round</Typography>
+          <Grid container justify="space-between">
+            <Fab variant="round" color="default"><Add /></Fab>
+            <Fab variant="round" color="primary"><Add /></Fab>
+            <Fab variant="round" color="secondary"><Add /></Fab>
+            <Fab variant="round" color="success"><Add /></Fab>
+            <Fab variant="round" color="warning"><Add /></Fab>
+            <Fab variant="round" color="danger"><Add /></Fab>
+          </Grid>
+          <Divider className={classes.divider} />
+          <Typography variant="h5" className={classes.title}>Fab extended</Typography>
+          <Grid container justify="space-between">
+            <Fab variant="extended" color="default">DEFAULT</Fab>
+            <Fab variant="extended" color="primary">PRIMARY</Fab>
+            <Fab variant="extended" color="secondary">SECONDARY</Fab>
+            <Fab variant="extended" color="success">SUCCESS</Fab>
+            <Fab variant="extended" color="warning">WARNING</Fab>
+            <Fab variant="extended" color="danger">DANGER</Fab>
+          </Grid>
+          <Divider className={classes.divider} />
           <Typography variant="h5" className={classes.title}>Icon button</Typography>
           <Grid container justify="space-between">
             <IconButton color="default"><Add /></IconButton>
@@ -69,7 +89,6 @@ class Content extends React.Component<PContent> {
             <IconButton color="warning"><Add /></IconButton>
             <IconButton color="danger"><Add /></IconButton>
           </Grid>
-          <Divider className={classes.divider} />
         </Paper>
       </Grid>
     );
