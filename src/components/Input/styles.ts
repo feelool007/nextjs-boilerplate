@@ -1,5 +1,15 @@
 import { createStyles, Theme } from "@material-ui/core";
 
 export const inputStyles = (theme: Theme) => createStyles({
-  root: {}
+  root: {},
+  icon: {
+    fontSize: 16,
+    color: "#9e9e9e"
+  },
+  clear: {
+    cursor: "pointer",
+    "&:hover": {
+      color: "#616161"
+    }
+  }
 })

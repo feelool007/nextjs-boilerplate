@@ -1,5 +1,7 @@
 import React from "react";
 import { withStyles, FormControl, InputLabel, Input as MuiInput, FormHelperText } from "@material-ui/core";
+import Clear from "@material-ui/icons/Clear";
+import classNames from "classnames";
 
 import { PInput } from "./types";
 import { inputStyles } from "./styles";
@@ -11,7 +13,25 @@ class Input extends React.Component<PInput> {
     helperText: "",
     required: false,
     error: false,
-    fullWidth: false
+    fullWidth: false,
+    clearable: false
+  };
+
+  private inputRef = React.createRef<HTMLInputElement>();
+
+  handleClear = () => {
+    const { name, onChange, onClear } = this.props;
+    if (onClear) {
+      onClear();
+    } else {
+      const elem = this.inputRef.current!;
+      const event = new Event("change");
+      elem.addEventListener("change", onChange!, false);
+      elem.name = name!;
+      elem.value = "";
+      elem.dispatchEvent(event);
+      elem.focus();
+    }
   };
 
   render = () => {
@@ -23,6 +43,7 @@ class Input extends React.Component<PInput> {
       fullWidth,
       required,
       error,
+      clearable,
       FormControlProps,
       InputLabelProps,
       FormHelperTextProps,
@@ -39,7 +60,22 @@ class Input extends React.Component<PInput> {
           {...FormControlProps}
         >
           <InputLabel {...InputLabelProps}>{label}</InputLabel>
-          <MuiInput value={value} {...InputProps} />
+          <MuiInput
+            value={value}
+            endAdornment={
+              clearable && Boolean(value) ? (
+                <Clear
+                  className={classNames({
+                    [classes.icon]: true,
+                    [classes.clear]: true
+                  })}
+                  onClick={this.handleClear}
+                />
+              ) : null
+            }
+            inputRef={this.inputRef}
+            {...InputProps}
+          />
           {helperText && <FormHelperText {...FormHelperTextProps}>{helperText}</FormHelperText>}
         </FormControl>
       </ThemeProvider>

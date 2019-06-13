@@ -111,6 +111,7 @@ class Content extends React.Component<PContent, SContent> {
               <Input
                 fullWidth
                 required
+                clearable
                 color="secondary"
                 type="password"
                 name="password"

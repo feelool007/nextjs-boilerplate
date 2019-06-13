@@ -14,6 +14,8 @@ export interface PInput extends PThemeProvider, Omit<InputProps, "color" | "clas
   fullWidth?: boolean;
   required?: boolean;
   error?: boolean;
+  clearable?: boolean;
+  onClear?: () => void;
   FormControlProps?: FormControlProps;
   InputLabelProps?: InputLabelProps;
   FormHelperTextProps?: FormHelperTextProps;
