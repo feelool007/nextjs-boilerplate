@@ -6,6 +6,6 @@ import { PThemeProvider } from "../ThemeProvider";
 
 export interface PCheckbox extends PThemeProvider, Omit<CheckboxProps, "color"> {
   value?: string;
-  label: string;
+  label?: string;
   formControlLabelProps?: FormControlLabelProps
 }
