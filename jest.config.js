@@ -8,5 +8,11 @@ module.exports = {
   },
   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  collectCoverage: true
+  moduleNameMapper: {
+    "\\.(css|less)$": "identity-obj-proxy"
+  },
+  collectCoverage: false,
+  snapshotSerializers: [
+    "enzyme-to-json/serializer"
+  ]
 }

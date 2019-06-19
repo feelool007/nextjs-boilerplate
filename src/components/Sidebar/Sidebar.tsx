@@ -4,7 +4,7 @@ import { Drawer, withStyles, List, ListItem, ListItemText, Hidden } from "@mater
 import { Home } from "@material-ui/icons";
 import classNames from "classnames";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import "react-perfect-scrollbar/dist/css/styles.css"
+import "react-perfect-scrollbar/dist/css/styles.css";
 
 import { PSidebar } from "./types";
 import { sidebarStyles } from "./styles";

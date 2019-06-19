@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sidebar UI Test component snapshot 1`] = `
+<Fragment>
+  <Hidden
+    implementation="js"
+    lgDown={false}
+    lgUp={false}
+    mdDown={true}
+    mdUp={false}
+    smDown={false}
+    smUp={false}
+    xlDown={false}
+    xlUp={false}
+    xsDown={false}
+    xsUp={false}
+  >
+    <WithStyles(ForwardRef(Drawer))
+      classes={
+        Object {
+          "paper": "Sidebar-rootBasic-1 Sidebar-rootNormal-3",
+        }
+      }
+      open={true}
+      variant="permanent"
+    >
+      <ScrollBar
+        className=""
+        component="div"
+        containerRef={[Function]}
+      >
+        <WithStyles(ForwardRef(List))
+          className="Sidebar-brandContainer-4"
+        >
+          <Link
+            href="/"
+          >
+            <WithStyles(ForwardRef(ListItem))
+              button={true}
+            >
+              <WithStyles(ForwardRef(ListItemText))
+                classes={
+                  Object {
+                    "primary": "Sidebar-brand-5",
+                  }
+                }
+                primary=""
+              />
+            </WithStyles(ForwardRef(ListItem))>
+          </Link>
+        </WithStyles(ForwardRef(List))>
+        <WithStyles(withRouter(SidebarMenu))
+          key="0"
+          mini={false}
+          pageGroup={
+            Object {
+              "groupName": "Index",
+              "icon": Object {
+                "$$typeof": Symbol(react.memo),
+                "compare": null,
+                "displayName": "EditIcon",
+                "muiName": "SvgIcon",
+                "type": Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "render": [Function],
+                },
+              },
+              "pages": Array [
+                Object {
+                  "name": "home",
+                  "to": "/",
+                },
+              ],
+            }
+          }
+        />
+        <WithStyles(withRouter(SidebarMenu))
+          key="1"
+          mini={false}
+          pageGroup={
+            Object {
+              "groupName": "About",
+              "icon": Object {
+                "$$typeof": Symbol(react.memo),
+                "compare": null,
+                "displayName": "EditIcon",
+                "muiName": "SvgIcon",
+                "type": Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "render": [Function],
+                },
+              },
+              "pages": Array [
+                Object {
+                  "name": "about",
+                  "to": "about",
+                },
+              ],
+            }
+          }
+        />
+      </ScrollBar>
+    </WithStyles(ForwardRef(Drawer))>
+  </Hidden>
+  <Hidden
+    implementation="js"
+    lgDown={false}
+    lgUp={true}
+    mdDown={false}
+    mdUp={false}
+    smDown={false}
+    smUp={false}
+    xlDown={false}
+    xlUp={false}
+    xsDown={false}
+    xsUp={false}
+  >
+    <WithStyles(ForwardRef(Drawer))
+      classes={
+        Object {
+          "paper": "Sidebar-rootBasic-1 Sidebar-rootNormal-3",
+        }
+      }
+      onClose={[Function]}
+      open={false}
+      transitionDuration={250}
+      variant="temporary"
+    >
+      <ScrollBar
+        className=""
+        component="div"
+        containerRef={[Function]}
+      >
+        <WithStyles(ForwardRef(List))
+          className="Sidebar-brandContainer-4"
+        >
+          <Link
+            href="/"
+          >
+            <WithStyles(ForwardRef(ListItem))
+              button={true}
+            >
+              <WithStyles(ForwardRef(ListItemText))
+                classes={
+                  Object {
+                    "primary": "Sidebar-brand-5",
+                  }
+                }
+                primary=""
+              />
+            </WithStyles(ForwardRef(ListItem))>
+          </Link>
+        </WithStyles(ForwardRef(List))>
+        <WithStyles(withRouter(SidebarMenu))
+          key="0"
+          mini={false}
+          pageGroup={
+            Object {
+              "groupName": "Index",
+              "icon": Object {
+                "$$typeof": Symbol(react.memo),
+                "compare": null,
+                "displayName": "EditIcon",
+                "muiName": "SvgIcon",
+                "type": Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "render": [Function],
+                },
+              },
+              "pages": Array [
+                Object {
+                  "name": "home",
+                  "to": "/",
+                },
+              ],
+            }
+          }
+        />
+        <WithStyles(withRouter(SidebarMenu))
+          key="1"
+          mini={false}
+          pageGroup={
+            Object {
+              "groupName": "About",
+              "icon": Object {
+                "$$typeof": Symbol(react.memo),
+                "compare": null,
+                "displayName": "EditIcon",
+                "muiName": "SvgIcon",
+                "type": Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "render": [Function],
+                },
+              },
+              "pages": Array [
+                Object {
+                  "name": "about",
+                  "to": "about",
+                },
+              ],
+            }
+          }
+        />
+      </ScrollBar>
+    </WithStyles(ForwardRef(Drawer))>
+  </Hidden>
+</Fragment>
+`;

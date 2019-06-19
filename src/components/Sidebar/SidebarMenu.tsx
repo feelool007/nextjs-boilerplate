@@ -42,10 +42,10 @@ class SidebarMenu extends React.Component<PSidebarMenu, SSidebarMenu> {
     });
   };
 
-  handleBlur = () => {
-    const listItems = document.getElementsByName("li-item");
-    listItems.forEach(el => el.blur());
-  };
+  // handleBlur = () => {
+  //   const listItems = document.getElementsByName("li-item");
+  //   listItems.forEach(el => el.blur());
+  // };
 
   handleGenerateMenu = () => {
     const { router, classes } = this.props;
@@ -55,12 +55,10 @@ class SidebarMenu extends React.Component<PSidebarMenu, SSidebarMenu> {
         <Link key={index} href={d.to}>
           <ListItem
             button
-            name="li-item"
             className={classNames({
               [classes.menuItem]: true,
               [classes.menuItemHighlight]: d.to === router.pathname
             })}
-            onClick={this.handleBlur}
           >
             <ListItemText
               primary={d.name}
