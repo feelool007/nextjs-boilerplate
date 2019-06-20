@@ -15,7 +15,9 @@ import classNames from "classnames";
 
 import { PDataTable, SDataTable, SortDirectionKeys } from "./types";
 import { dataTableStyles } from "./styles";
+import TableToolbar from "./TableToolbar";
 import { Checkbox } from "../Checkbox";
+import { PInput } from "../Input";
 
 class DataTable extends React.Component<PDataTable, SDataTable> {
   static defaultProps = {
@@ -26,6 +28,7 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
     pick: false,
     toolbar: true,
     title: "",
+    search: true,
     rowsPerPageOptions: [10, 25, 50],
     actions: [],
     actionHeaders: []
@@ -46,8 +49,8 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
       page: 0,
       rowsPerPage: props.rowsPerPageOptions![0],
       selected: [],
-      picked: ""
-      // search: "",
+      picked: "",
+      searchValue: ""
       // filters
     };
     // this.data = [];
@@ -76,7 +79,7 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
     return `第${from} - ${to}筆，共${count}筆`;
   };
 
-  handleChangeSort = (nextSortBy: string) => {
+  handleChangeSort = (nextSortBy: string | number) => {
     const { sortBy, sortDirection } = this.state;
     let nextSortDirection: SortDirectionKeys;
     if (sortDirection === "asc") {
@@ -155,28 +158,33 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
 
   isPick = (value: any) => value === this.state.picked;
 
-  // handleChangeSearch = event => {
-  //   this.setState({ search: event.target.value });
-  // };
+  handleChangeSearch: PInput["onChange"] = event => {
+    this.setState({
+      searchValue: event.target.value
+    });
+  };
 
-  // getFiltedData = () => {
-  //   const { headers } = this.props;
-  //   const { search } = this.state;
-  //   if (search !== "") {
-  //     this.data = this.data.filter(d => {
-  //       // 只要其中一欄資料有包含search，就回傳true
-  //       return headers.some(h => {
-  //         if (!d[h.column]) return false;
-  //         return d[h.column].toString().includes(search);
-  //       });
-  //     });
-  //     // return filted data length
-  //     this.dataCount = this.data.length;
-  //   } else {
-  //     // if search is empty, return full data length
-  //     this.dataCount = this.props.data.length;
-  //   }
-  // };
+  handleClearSearch = () => {
+    this.setState({
+      searchValue: ""
+    });
+  };
+
+  getSearchData = (data: Array<any>) => {
+    const { headers } = this.props;
+    const { searchValue } = this.state;
+    if (searchValue !== "") {
+      return data.filter(d => {
+        // 只要其中一欄資料有包含search，就回傳true
+        return headers.some(h => {
+          if (!d[h.column]) return false;
+          return d[h.column].toString().includes(searchValue);
+        });
+      });
+    } else {
+      return data;
+    }
+  };
 
   // handleResetSearch = () => {
   //   this.setState({ search: "" });
@@ -209,26 +217,26 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
   //   }));
   // };
 
-  // formatContent = val => {
-  //   const { search } = this.state;
-  //   if (search.length > 0) {
-  //     let subset = val.toString().split(search);
-  //     return subset.map((d, index) => {
-  //       if (index === subset.length - 1) {
-  //         return d;
-  //       } else {
-  //         return (
-  //           <React.Fragment key={index}>
-  //             {d}
-  //             <mark>{search}</mark>
-  //           </React.Fragment>
-  //         );
-  //       }
-  //     });
-  //   } else {
-  //     return val;
-  //   }
-  // };
+  formatContent = (val: string | number) => {
+    const { searchValue } = this.state;
+    if (searchValue.length > 0) {
+      let subset = val.toString().split(searchValue);
+      return subset.map((d, index) => {
+        if (index === subset.length - 1) {
+          return d;
+        } else {
+          return (
+            <React.Fragment key={index}>
+              {d}
+              <mark>{searchValue}</mark>
+            </React.Fragment>
+          );
+        }
+      });
+    } else {
+      return val;
+    }
+  };
 
   getContent = () => {
     const { sort } = this.props;
@@ -237,13 +245,13 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
       return {
         ...d,
         dataIX: index
-      }
+      };
     });
     if (sort) {
       data = this.getSortedData(data);
       data = this.getPageData(data);
     }
-    // TODO: search
+    data = this.getSearchData(data);
     return data;
   };
 
@@ -254,15 +262,15 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
       actions,
       actionHeaders,
       rowsPerPageOptions,
-      title,
       sort,
       hover,
       select,
       selectBy,
       pick,
-      pickBy
-      // toolbar,
-      // title,
+      pickBy,
+      toolbar,
+      title,
+      search
       // searchable,
       // filterble,
       // csv,
@@ -273,7 +281,7 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
       // getTableRowStyle,
     } = this.props;
     // let { TBodyCell } = components;
-    const { page, rowsPerPage, sortBy, sortDirection } = this.state;
+    const { page, rowsPerPage, sortBy, sortDirection, searchValue } = this.state;
     const columns = headers.map(h => h.column);
     const data = this.getContent();
 
@@ -320,6 +328,17 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
             </Hidden>
           </React.Fragment>
         )} */}
+        {toolbar && (
+          <TableToolbar
+            title={title}
+            search={search}
+            SearchProps={{
+              value: searchValue,
+              onChange: this.handleChangeSearch,
+              onClear: this.handleClearSearch
+            }}
+          />
+        )}
         <Table padding="default" size="small">
           <TableHead>
             <TableRow className={classes.header}>
@@ -386,8 +405,8 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
                       //   </TableCell>
                       // ))
                       <TableCell key={colIX} className={classes.tableCell}>
-                        {/* {this.formatContent(d[col])} */}
-                        {d[col]}
+                        {this.formatContent(d[col])}
+                        {/* {d[col]} */}
                       </TableCell>
                     );
                   })}

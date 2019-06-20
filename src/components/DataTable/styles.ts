@@ -1,9 +1,22 @@
 import { createStyles, Theme } from "@material-ui/core";
 
 export const toolbarStyles = (theme: Theme) => createStyles({
-  root: {},
+  root: {
+    padding: theme.spacing(2)
+  },
+  actionContainer: {
+    display: "flex",
+    alignItems: "center",
+    "&:child": {
+      marginRight: theme.spacing(2)
+    }
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: "bold"
+  },
   icon: {
-    fontSize: 24,
+    fontSize: 26,
     color: "#9e9e9e"
   },
   iconClickable: {
@@ -15,12 +28,16 @@ export const toolbarStyles = (theme: Theme) => createStyles({
     }
   },
   searchContainer: {
-    transition: "width ease 0.2s"
+    transition: "width ease 0.2s",
+    paddingTop: 0
+  },
+  searchContainerOpen: {
+    width: 240
   },
   searchContainerClose: {
-    width: 24
+    width: 26
   },
-  searchInput: {
+  iconSearchInput: {
     marginRight: theme.spacing(1.5)
   }
 });

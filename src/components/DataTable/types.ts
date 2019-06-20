@@ -4,7 +4,7 @@ import { TableProps } from "@material-ui/core/Table";
 import { toolbarStyles, dataTableStyles } from "./styles";
 import { PInput } from "../Input";
 
-export type TableDataHeader<T = any> = {
+export type TableDataHeader<T = { [key: string]: any }> = {
   column: keyof T;
   label: string;
 };
@@ -26,6 +26,7 @@ export interface PDataTable
   pickBy?: string;
   toolbar?: boolean;
   title?: React.ReactNode;
+  search?: boolean;
   rowsPerPageOptions?: Array<number>;
   actions?: Array<React.ReactElement>;
   actionHeaders?: Array<string>;
@@ -40,7 +41,16 @@ export interface SDataTable {
   rowsPerPage: number;
   selected: Array<any>;
   picked: any;
+  searchValue: string;
 }
+
+export interface PTableToolbar extends WithStyles<typeof toolbarStyles> {
+  title?: React.ReactNode;
+  search?: boolean;
+  SearchProps: Omit<PSearch, "classes">;
+}
+
+export interface STableToolbar {}
 
 export interface PSearch extends WithStyles<typeof toolbarStyles>, Omit<PInput, "classes"> {
   onClear: () => void;
@@ -48,4 +58,5 @@ export interface PSearch extends WithStyles<typeof toolbarStyles>, Omit<PInput, 
 
 export interface SSearch {
   open: boolean;
+  disableUnderline: boolean;
 }

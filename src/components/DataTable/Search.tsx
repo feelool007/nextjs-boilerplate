@@ -8,35 +8,51 @@ import { toolbarStyles } from "./styles";
 import { Input } from "../Input";
 
 class Search extends React.Component<PSearch, SSearch> {
+  private inputRef = React.createRef<HTMLInputElement>();
+
   constructor(props: PSearch) {
     super(props);
     this.state = {
-      open: false
+      open: false,
+      disableUnderline: true
     };
   }
 
   handleOpen = () => {
-    this.setState({ open: true });
+    this.inputRef.current!.focus();
+    this.setState({
+      open: true,
+      disableUnderline: false
+    });
   };
 
   handleClose = () => {
     const { onClear } = this.props;
+    this.inputRef.current!.blur();
     this.setState({ open: false });
     onClear();
   };
 
+  handleDisableUnderline = () => {
+    const { open } = this.state;
+    if (!open) {
+      this.setState({ disableUnderline: true });
+    }
+  };
+
   render = () => {
     const { classes, ...InputProps } = this.props;
-    const { open } = this.state;
+    const { open, disableUnderline } = this.state;
     return (
       <Input
         {...InputProps}
+        inputRef={this.inputRef}
         color="secondary"
-        disableUnderline={!open}
+        disableUnderline={disableUnderline}
         startAdornment={
           <SearchIcon
             className={classNames(classes.icon, {
-              [classes.searchInput]: open,
+              [classes.iconSearchInput]: open,
               [classes.iconClickable]: !open,
               [classes.iconHighlight]: !open
             })}
@@ -55,9 +71,11 @@ class Search extends React.Component<PSearch, SSearch> {
           className: classNames(
             classes.searchContainer,
             classNames({
+              [classes.searchContainerOpen]: open,
               [classes.searchContainerClose]: !open
             })
-          )
+          ),
+          onTransitionEnd: this.handleDisableUnderline
         }}
       />
     );
