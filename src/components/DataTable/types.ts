@@ -1,5 +1,6 @@
 import { WithStyles, Omit } from "@material-ui/core";
 import { TableProps } from "@material-ui/core/Table";
+import { LinkProps } from "react-csv/components/Link";
 
 import { toolbarStyles, dataTableStyles } from "./styles";
 import { PInput } from "../Input";
@@ -15,7 +16,7 @@ export interface PDataTable
   extends WithStyles<typeof dataTableStyles>,
     Omit<TableProps, "classes" | "title" | "onSelect"> {
   headers: Array<TableDataHeader>;
-  data: Array<any>;
+  data: Array<Object>;
   sort?: boolean;
   hover?: boolean;
   defaultSortDirection?: SortDirectionKeys;
@@ -27,6 +28,7 @@ export interface PDataTable
   toolbar?: boolean;
   title?: React.ReactNode;
   search?: boolean;
+  csv?: boolean;
   rowsPerPageOptions?: Array<number>;
   actions?: Array<React.ReactElement>;
   actionHeaders?: Array<string>;
@@ -48,6 +50,8 @@ export interface PTableToolbar extends WithStyles<typeof toolbarStyles> {
   title?: React.ReactNode;
   search?: boolean;
   SearchProps: Omit<PSearch, "classes">;
+  csv?: boolean;
+  CSVDownloadProps: Omit<PCSVDownload, "classes">;
 }
 
 export interface STableToolbar {}
@@ -60,3 +64,5 @@ export interface SSearch {
   open: boolean;
   disableUnderline: boolean;
 }
+
+export interface PCSVDownload extends WithStyles<typeof toolbarStyles>, LinkProps {}

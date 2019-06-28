@@ -2,14 +2,13 @@ import { createStyles, Theme } from "@material-ui/core";
 
 export const toolbarStyles = (theme: Theme) => createStyles({
   root: {
-    padding: theme.spacing(2)
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+    paddingBottom: theme.spacing(2)
   },
   actionContainer: {
     display: "flex",
-    alignItems: "center",
-    "&:child": {
-      marginRight: theme.spacing(2)
-    }
+    alignItems: "flex-top"
   },
   title: {
     fontSize: 18,
@@ -17,14 +16,14 @@ export const toolbarStyles = (theme: Theme) => createStyles({
   },
   icon: {
     fontSize: 26,
-    color: "#9e9e9e"
+    color: "#616161"
   },
   iconClickable: {
     cursor: "pointer"
   },
   iconHighlight: {
     "&:hover": {
-      color: "#616161"
+      color: "#212121"
     }
   },
   searchContainer: {

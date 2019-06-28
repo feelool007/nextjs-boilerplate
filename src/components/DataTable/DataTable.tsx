@@ -13,11 +13,12 @@ import {
 import { TablePaginationProps } from "@material-ui/core/TablePagination";
 import classNames from "classnames";
 
-import { PDataTable, SDataTable, SortDirectionKeys } from "./types";
+import { PDataTable, SDataTable, SortDirectionKeys, PCSVDownload } from "./types";
 import { dataTableStyles } from "./styles";
 import TableToolbar from "./TableToolbar";
 import { Checkbox } from "../Checkbox";
 import { PInput } from "../Input";
+import { LabelKeyObject } from "react-csv/components/CommonPropTypes";
 
 class DataTable extends React.Component<PDataTable, SDataTable> {
   static defaultProps = {
@@ -29,10 +30,13 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
     toolbar: true,
     title: "",
     search: true,
+    csv: true,
     rowsPerPageOptions: [10, 25, 50],
     actions: [],
     actionHeaders: []
   };
+
+  private __csvHeaders: PCSVDownload["headers"];
 
   constructor(props: PDataTable) {
     super(props);
@@ -53,6 +57,10 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
       searchValue: ""
       // filters
     };
+    this.__csvHeaders = props.headers.map<LabelKeyObject>(d => ({
+      key: d.column as string,
+      label: d.label
+    }));
     // this.data = [];
     // this.dataCount = 0;
     // this.csvHeaders =
@@ -270,7 +278,8 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
       pickBy,
       toolbar,
       title,
-      search
+      search,
+      csv
       // searchable,
       // filterble,
       // csv,
@@ -336,6 +345,13 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
               value: searchValue,
               onChange: this.handleChangeSearch,
               onClear: this.handleClearSearch
+            }}
+            csv={csv}
+            CSVDownloadProps={{
+              uFEFF: true,
+              filename: "export.csv",
+              headers: this.__csvHeaders,
+              data: data
             }}
           />
         )}
