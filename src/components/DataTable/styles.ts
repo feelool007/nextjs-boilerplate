@@ -4,15 +4,18 @@ export const toolbarStyles = (theme: Theme) => createStyles({
   root: {
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
+    borderBottom: "1px solid #e0e0e0"
   },
   actionContainer: {
-    display: "flex",
-    alignItems: "flex-top"
+    display: "flex"
   },
   title: {
     fontSize: 18,
     fontWeight: "bold"
+  },
+  tooltip: {
+    marginTop: -12
   },
   icon: {
     fontSize: 26,

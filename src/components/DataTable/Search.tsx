@@ -1,5 +1,5 @@
 import React from "react";
-import { withStyles } from "@material-ui/core";
+import { withStyles, Tooltip } from "@material-ui/core";
 import { Search as SearchIcon, Clear } from "@material-ui/icons";
 import classNames from "classnames";
 
@@ -44,40 +44,42 @@ class Search extends React.Component<PSearch, SSearch> {
     const { classes, ...InputProps } = this.props;
     const { open, disableUnderline } = this.state;
     return (
-      <Input
-        {...InputProps}
-        inputRef={this.inputRef}
-        color="secondary"
-        disableUnderline={disableUnderline}
-        startAdornment={
-          <SearchIcon
-            className={classNames(classes.icon, {
-              [classes.iconSearchInput]: open,
-              [classes.iconClickable]: !open,
-              [classes.iconHighlight]: !open
-            })}
-            onClick={open ? undefined : this.handleOpen}
-          />
-        }
-        endAdornment={
-          open && (
-            <Clear
-              className={classNames(classes.icon, classes.iconClickable, classes.iconHighlight)}
-              onClick={this.handleClose}
+      <Tooltip title="搜尋資料" classes={{ popper: classes.tooltip }}>
+        <Input
+          {...InputProps}
+          inputRef={this.inputRef}
+          color="secondary"
+          disableUnderline={disableUnderline}
+          startAdornment={
+            <SearchIcon
+              className={classNames(classes.icon, {
+                [classes.iconSearchInput]: open,
+                [classes.iconClickable]: !open,
+                [classes.iconHighlight]: !open
+              })}
+              onClick={open ? undefined : this.handleOpen}
             />
-          )
-        }
-        FormControlProps={{
-          className: classNames(
-            classes.searchContainer,
-            classNames({
-              [classes.searchContainerOpen]: open,
-              [classes.searchContainerClose]: !open
-            })
-          ),
-          onTransitionEnd: this.handleDisableUnderline
-        }}
-      />
+          }
+          endAdornment={
+            open && (
+              <Clear
+                className={classNames(classes.icon, classes.iconClickable, classes.iconHighlight)}
+                onClick={this.handleClose}
+              />
+            )
+          }
+          FormControlProps={{
+            className: classNames(
+              classes.searchContainer,
+              classNames({
+                [classes.searchContainerOpen]: open,
+                [classes.searchContainerClose]: !open
+              })
+            ),
+            onTransitionEnd: this.handleDisableUnderline
+          }}
+        />
+      </Tooltip>
     );
   };
 }
