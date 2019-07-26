@@ -16,7 +16,7 @@ import classNames from "classnames";
 import { PDataTable, SDataTable, SortDirectionKeys, PCSVDownload } from "./types";
 import { dataTableStyles } from "./styles";
 import TableToolbar from "./TableToolbar";
-import { Checkbox } from "../Checkbox";
+import { Checkbox, PCheckbox } from "../Checkbox";
 import { PInput } from "../Input";
 import { LabelKeyObject } from "react-csv/components/CommonPropTypes";
 
@@ -31,6 +31,7 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
     title: "",
     search: true,
     csv: true,
+    viewColumns: true,
     rowsPerPageOptions: [10, 25, 50],
     actions: [],
     actionHeaders: []
@@ -40,13 +41,10 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
 
   constructor(props: PDataTable) {
     super(props);
-    // let filters = {};
-    // props.headers.forEach(h => {
-    //   filters[h.column] = {
-    //     label: h.label,
-    //     visible: true
-    //   };
-    // });
+    const columnOptions = props.headers.map(d => ({
+      ...d,
+      visible: true
+    }));
     this.state = {
       sortBy: props.defaultSortBy || props.headers[0].column,
       sortDirection: props.defaultSortDirection!,
@@ -54,21 +52,13 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
       rowsPerPage: props.rowsPerPageOptions![0],
       selected: [],
       picked: "",
-      searchValue: ""
-      // filters
+      searchValue: "",
+      columnOptions
     };
     this.__csvHeaders = props.headers.map<LabelKeyObject>(d => ({
-      key: d.column as string,
+      key: d.column.toString(),
       label: d.label
     }));
-    // this.data = [];
-    // this.dataCount = 0;
-    // this.csvHeaders =
-    //   props.csvHeaders ||
-    //   props.headers.map(d => ({
-    //     ...d,
-    //     key: d.column
-    //   }));
     // this.__refToPrint = React.createRef();
   }
 
@@ -194,10 +184,6 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
     }
   };
 
-  // handleResetSearch = () => {
-  //   this.setState({ search: "" });
-  // };
-
   handlePick = (value: any) => () => {
     let { pick, onPick } = this.props;
     if (pick) {
@@ -212,18 +198,16 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
     }
   };
 
-  // handleChangeFilter = (event, checked) => {
-  //   const { name } = event.target;
-  //   this.setState(prevState => ({
-  //     filters: {
-  //       ...prevState.filters,
-  //       [name]: {
-  //         label: prevState.filters[name].label,
-  //         visible: checked
-  //       }
-  //     }
-  //   }));
-  // };
+  handleChangeViewColumns: PCheckbox["onChange"] = (event, checked) => {
+    const { value } = event.target;
+    this.setState(prevState => {
+      const index = prevState.columnOptions.findIndex(d => d.column === value);
+      prevState.columnOptions[index].visible = checked;
+      return {
+        columnOptions: prevState.columnOptions
+      };
+    });
+  };
 
   formatContent = (val: string | number) => {
     const { searchValue } = this.state;
@@ -248,7 +232,8 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
 
   getContent = () => {
     const { sort } = this.props;
-    // TODO: column filter
+    const { columnOptions } = this.state;
+
     let data = this.props.data.map((d, index) => {
       return {
         ...d,
@@ -266,7 +251,6 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
   render = () => {
     let {
       classes,
-      headers,
       actions,
       actionHeaders,
       rowsPerPageOptions,
@@ -279,19 +263,17 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
       toolbar,
       title,
       search,
-      csv
-      // searchable,
-      // filterble,
-      // csv,
-      // csvFilename,
+      csv,
+      viewColumns
       // printable,
       // minWidth,
       // components,
       // getTableRowStyle,
     } = this.props;
     // let { TBodyCell } = components;
-    const { page, rowsPerPage, sortBy, sortDirection, searchValue } = this.state;
-    const columns = headers.map(h => h.column);
+    const { page, rowsPerPage, sortBy, sortDirection, searchValue, columnOptions } = this.state;
+    const headers = columnOptions.filter(d => d.visible);
+    const columns = headers.map(d => d.column);
     const data = this.getContent();
 
     return (
@@ -352,6 +334,11 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
               filename: "export.csv",
               headers: this.__csvHeaders,
               data: data
+            }}
+            viewColumns={viewColumns}
+            ViewColumnsProps={{
+              options: columnOptions,
+              onChnage: this.handleChangeViewColumns
             }}
           />
         )}

@@ -41,6 +41,11 @@ export const toolbarStyles = (theme: Theme) => createStyles({
   },
   iconSearchInput: {
     marginRight: theme.spacing(1.5)
+  },
+  columnMenu: {
+    minWidth: 220,
+    maxHeight: 260,
+    padding: theme.spacing(1.5)
   }
 });
 
