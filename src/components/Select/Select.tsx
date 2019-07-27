@@ -1,5 +1,6 @@
 import React from "react";
 import { withStyles, FormControl, InputLabel, FormHelperText } from "@material-ui/core";
+import { MenuListProps } from "@material-ui/core/MenuList";
 
 import { PSelect, SSelect, ChangeEventHandler, SelectOption } from "./types";
 import { selectStyles } from "./styles";
@@ -23,6 +24,8 @@ class Select extends React.Component<PSelect, SSelect> {
     allLabel: "All"
   };
 
+  private __searchRef = React.createRef<HTMLInputElement>();
+
   constructor(props: PSelect) {
     super(props);
     this.state = {
@@ -30,13 +33,51 @@ class Select extends React.Component<PSelect, SSelect> {
     };
   }
 
+  focusSearch = () => {
+    if (this.__searchRef.current) {
+      this.__searchRef.current.focus();
+    }
+  };
+
   handleSearchChange: ChangeEventHandler = event => {
+    /**
+     * Temporary disable this handler, see the reasons described as below.
+     */
     const { value } = event.target;
-    this.setState({ searchValue: value });
+    this.focusSearch();
+    this.setState({ searchValue: value }, this.focusSearch);
+  };
+
+  handleMenuListKeyDown: MenuListProps["onKeyDown"] = event => {
+    /**
+     * Mui MenuList has a keyDown event handler which will auto focus on items
+     * whose first case matches the key. This feature can not be disabled for now,
+     * and it will prevent handleSearchChange, make search handler do not work as expect.
+     * Temporary replace handleSearchChange until mui fix this feature.
+     */
+    // TODO: remove this hanlder when mui disable keyDown handler.
+    const { search } = this.props;
+    if (search) {
+      const { key } = event;
+      if (key.length === 1) {
+        const selectionStart = this.__searchRef.current!.selectionStart!;
+        this.setState(
+          prevState => ({
+            searchValue:
+              prevState.searchValue.slice(0, selectionStart) + key + prevState.searchValue.slice(selectionStart)
+          }),
+          () => {
+            this.focusSearch();
+            this.__searchRef.current!.setSelectionRange(selectionStart + 1, selectionStart + 1);
+          }
+        );
+        event.preventDefault();
+      }
+    }
   };
 
   handleSearchClear = () => {
-    this.setState({ searchValue: "" });
+    this.setState({ searchValue: "" }, this.focusSearch);
   };
 
   getOptions = () => {
@@ -49,7 +90,7 @@ class Select extends React.Component<PSelect, SSelect> {
       options = this.props.options.filter(d => d.label.includes(searchValue));
     }
     if (all) {
-      options = ([{ value: allValue, label: allLabel } as SelectOption]).concat(options)
+      options = [{ value: allValue, label: allLabel } as SelectOption].concat(options);
     }
     return options;
   };
@@ -85,9 +126,43 @@ class Select extends React.Component<PSelect, SSelect> {
             {label}
           </InputLabel>
           {multiple ? (
-            <SelectMulti multiple={true} searchValue={searchValue} options={options} onSearchChange={this.handleSearchChange} onSearchClear={this.handleSearchClear} {...SelectProps} />
+            <SelectMulti
+              multiple={true}
+              searchValue={searchValue}
+              searchRef={this.__searchRef}
+              options={options}
+              onSearchChange={this.handleSearchChange}
+              onSearchClear={this.handleSearchClear}
+              MenuProps={{
+                className: classes.menu,
+                variant: "menu",
+                onEntered: this.focusSearch,
+                onExited: this.handleSearchClear,
+                MenuListProps: {
+                  onKeyDown: this.handleMenuListKeyDown
+                }
+              }}
+              {...SelectProps}
+            />
           ) : (
-            <SelectSingle multiple={false} searchValue={searchValue} options={options} onSearchChange={this.handleSearchChange} onSearchClear={this.handleSearchClear} {...SelectProps} />
+            <SelectSingle
+              multiple={false}
+              searchValue={searchValue}
+              searchRef={this.__searchRef}
+              options={options}
+              onSearchChange={this.handleSearchChange}
+              onSearchClear={this.handleSearchClear}
+              MenuProps={{
+                className: classes.menu,
+                variant: "menu",
+                onEntered: this.focusSearch,
+                onExited: this.handleSearchClear,
+                MenuListProps: {
+                  onKeyDown: this.handleMenuListKeyDown
+                }
+              }}
+              {...SelectProps}
+            />
           )}
           {helperText && <FormHelperText {...FormHelperText}>{helperText}</FormHelperText>}
         </FormControl>

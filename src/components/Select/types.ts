@@ -6,6 +6,7 @@ import { FormHelperTextProps } from "@material-ui/core/FormHelperText";
 
 import { selectStyles } from "./styles";
 import { PThemeProvider } from "../ThemeProvider";
+import { PInput } from "../Input";
 
 export type ChangeEventHandler = React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement>;
 
@@ -34,6 +35,7 @@ export interface PSelectBase extends Omit<SelectProps, "color" | "classes">, Wit
 export interface PSelectSearch extends WithStyles<typeof selectStyles> {
   searchValue: string;
   onSearchChange: ChangeEventHandler;
+  searchRef: PInput["inputRef"];
   onSearchClear: () => void;
 }
 

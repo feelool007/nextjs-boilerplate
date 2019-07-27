@@ -14,7 +14,7 @@ class SelectMulti extends React.Component<PSelectMulti> {
 
   handleChange: SelectProps["onChange"] = (event, child) => {
     const { onChange, all, allValue } = this.props;
-    const value = (event.target.value as Array<any>);
+    const value = event.target.value as Array<any>;
     if (all && value[value.length - 1] === allValue) {
       if (this.isCheckedAll()) {
         event.target.value = [];
@@ -53,6 +53,7 @@ class SelectMulti extends React.Component<PSelectMulti> {
       options,
       search,
       searchValue,
+      searchRef,
       onSearchChange,
       onSearchClear,
       classes,
@@ -62,14 +63,14 @@ class SelectMulti extends React.Component<PSelectMulti> {
       ...SelectProps
     } = this.props;
     return (
-      <Select
-        renderValue={this.getRenderValue}
-        MenuProps={{ className: classes.menu }}
-        {...SelectProps}
-        onChange={this.handleChange}
-      >
+      <Select renderValue={this.getRenderValue} {...SelectProps} onChange={this.handleChange}>
         {search && (
-          <SelectSearch searchValue={searchValue} onSearchChange={onSearchChange} onSearchClear={onSearchClear} />
+          <SelectSearch
+            searchValue={searchValue}
+            searchRef={searchRef}
+            onSearchChange={onSearchChange}
+            onSearchClear={onSearchClear}
+          />
         )}
         {options.map((d, index) => {
           return (

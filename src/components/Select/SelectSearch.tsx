@@ -9,11 +9,12 @@ import { Input } from "../Input";
 
 class SelectSearch extends React.Component<PSelectSearch> {
   render = () => {
-    const { searchValue, onSearchChange, onSearchClear, classes } = this.props;
+    const { searchValue, searchRef, onSearchChange, onSearchClear, classes } = this.props;
     return (
       <Input
         fullWidth
         value={searchValue}
+        inputRef={searchRef}
         onChange={onSearchChange}
         startAdornment={
           <Search

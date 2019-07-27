@@ -18,6 +18,7 @@ class SelectSingle extends React.Component<PSelectSingle> {
       searchValue,
       onSearchChange,
       onSearchClear,
+      searchRef,
       classes,
       all,
       allValue,
@@ -25,9 +26,14 @@ class SelectSingle extends React.Component<PSelectSingle> {
       ...SelectProps
     } = this.props;
     return (
-      <Select MenuProps={{ className: classes.menu }} {...SelectProps}>
+      <Select {...SelectProps}>
         {search && (
-          <SelectSearch searchValue={searchValue} onSearchChange={onSearchChange} onSearchClear={onSearchClear} />
+          <SelectSearch
+            searchValue={searchValue}
+            searchRef={searchRef}
+            onSearchChange={onSearchChange}
+            onSearchClear={onSearchClear}
+          />
         )}
         {options.map((d, index) => {
           return (
