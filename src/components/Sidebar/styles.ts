@@ -36,7 +36,8 @@ export const sidebarStyles = (theme: Theme) => createStyles({
   },
   menu: {
     fontSize: 18,
-    height: 55
+    height: 55,
+    width: "90%"
   },
   popperMenu: {
     backgroundColor: "#424242",
@@ -55,22 +56,21 @@ export const sidebarStyles = (theme: Theme) => createStyles({
   },
   menuItem: {
     height: 40,
-    width: "85%",
+    width: "90%",
     borderRadius: 8,
-    marginLeft: theme.spacing(1.5),
+    color: "rgb(185, 185, 185)",
+    marginTop: theme.spacing(1),
     "&:hover": {
+      color: "white",
       backgroundColor: "#424242"
     }
   },
   menuItemText: {
     fontSize: 16,
-    color: "rgb(185, 185, 185)",
-    paddingLeft: "1.5em",
-    "&:hover": {
-      color: "rgb(255, 255, 255)"
-    }
+    marginLeft: theme.spacing(2)
   },
   menuItemHighlight: {
+    color: "white",
     backgroundColor: "#00bcd4",
     border: "1px solid #00838f",
     "&:hover": {
@@ -78,13 +78,20 @@ export const sidebarStyles = (theme: Theme) => createStyles({
     }
   },
   menuItemTextHighlight: {
-    color: "white",
     fontWeight: "bold"
   },
   icon: {
     fontSize: 20
   },
+  visibleHidden: {
+    visibility: "hidden"
+  },
   flex: {
     flex: 1
+  },
+  tooltip: {
+    marginLeft: theme.spacing(0.5),
+    fontSize: 16,
+    backgroundColor: "#424242"
   }
 })

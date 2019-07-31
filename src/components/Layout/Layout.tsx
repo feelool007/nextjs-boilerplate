@@ -10,7 +10,7 @@ import PageProgress from "./PageProgress";
 import { Sidebar } from "../Sidebar";
 import { Header } from "../Header";
 import { Footer } from "../Footer";
-import { pageGroups } from "../../_helpers/fakeData";
+import { pages, pageGroups } from "../../_helpers/fakeData";
 
 class Layout extends React.Component<PLayout, SLayout> {
   constructor(props: PLayout) {
@@ -60,6 +60,7 @@ class Layout extends React.Component<PLayout, SLayout> {
         <SidebarWrapper>
           <Sidebar
             brand="NextJS Boilerplate"
+            pages={pages}
             pageGroups={pageGroups}
             mini={mini}
             rwdOpen={rwdOpen}

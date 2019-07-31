@@ -5,31 +5,40 @@ import { RouterProps } from "next/router";
 import { sidebarStyles } from "./styles";
 
 export interface Page {
-  name: string,
-  to: string
+  icon?: React.ComponentType<SvgIconProps>;
+  name: string;
+  to: string;
+  groupName?: string;
 }
 
 export interface PageGroup {
-  icon: React.ComponentType<SvgIconProps>,
-  groupName?: string,
-  pages: Page[]
+  icon?: React.ComponentType<SvgIconProps>;
+  groupName: string;
+}
+
+export interface PSidebarLink extends WithStyles<typeof sidebarStyles> {
+  page: Page;
+  router: RouterProps;
+  mini: boolean;
 }
 
 export interface PSidebarMenu extends WithStyles<typeof sidebarStyles> {
-  mini?: boolean,
-  pageGroup: PageGroup,
-  router: RouterProps
+  mini?: boolean;
+  pages: Page[];
+  icon?: React.ComponentType<SvgIconProps>;
+  groupName: string;
 }
 
 export interface SSidebarMenu {
-  openCollapse: boolean,
-  openPopover: boolean
+  openCollapse: boolean;
+  openPopover: boolean;
 }
 
 export interface PSidebar extends WithStyles<typeof sidebarStyles> {
-  brand?: string,
-  mini?: boolean,
-  rwdOpen?: boolean,
-  pageGroups: PageGroup[],
-  onToggleRwd: () => void
+  brand?: string;
+  mini?: boolean;
+  rwdOpen?: boolean;
+  pages: Page[];
+  pageGroups: PageGroup[];
+  onToggleRwd: () => void;
 }

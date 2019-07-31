@@ -1,14 +1,15 @@
 import React from "react";
 import Link from "next/link";
-import { Drawer, withStyles, List, ListItem, ListItemText, Hidden } from "@material-ui/core";
+import { Drawer, withStyles, List, ListItem, ListItemText, Hidden, Tooltip } from "@material-ui/core";
 import { Home } from "@material-ui/icons";
 import classNames from "classnames";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 
-import { PSidebar } from "./types";
+import { PSidebar, Page } from "./types";
 import { sidebarStyles } from "./styles";
 import SidebarMenu from "./SidebarMenu";
+import SidebarLink from "./SidebarLink";
 
 class Sidebar extends React.Component<PSidebar> {
   static defaultProps = {
@@ -17,10 +18,17 @@ class Sidebar extends React.Component<PSidebar> {
     rwdOpen: false
   };
 
+  handleGetNestedPages = (groupName: string): Page[] => {
+    const { pages } = this.props;
+    return pages.filter(d => d.groupName === groupName);
+  };
+
   handleGenerateContent = () => {
-    const { mini, brand, pageGroups, classes } = this.props;
+    const { mini, brand, pages, pageGroups, classes } = this.props;
+    const nonNestedPages = pages.filter(d => !d.groupName);
     return (
       <PerfectScrollbar>
+        {/* brand */}
         <List className={classes.brandContainer}>
           <Link href="/">
             <ListItem button>
@@ -37,8 +45,27 @@ class Sidebar extends React.Component<PSidebar> {
             </ListItem>
           </Link>
         </List>
+        {/* menus: nonNested & nested */}
+        {nonNestedPages.map((page, index) => {
+          if (mini) {
+            const pageMini: Page = {
+              ...page,
+              name: ""
+            };
+            return (
+              <Tooltip title={page.name} placement="right-end" classes={{ tooltip: classes.tooltip }}>
+                <div>
+                  <SidebarLink key={index} page={pageMini} mini={mini} />
+                </div>
+              </Tooltip>
+            );
+          } else {
+            return <SidebarLink key={index} page={page} mini={mini} />;
+          }
+        })}
         {pageGroups.map((d, index) => {
-          return <SidebarMenu mini={mini} key={index} pageGroup={d} />;
+          const nestedPages = this.handleGetNestedPages(d.groupName);
+          return <SidebarMenu key={index} mini={mini} icon={d.icon} groupName={d.groupName} pages={nestedPages} />;
         })}
       </PerfectScrollbar>
     );

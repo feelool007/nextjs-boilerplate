@@ -6,13 +6,11 @@ import { withRouter } from "next/router";
 import { PHeader } from "./types";
 import { headerStyles } from "./styles";
 import { Page } from "../Sidebar/types";
-import { flat } from "../../utils/utility";
-import { pageGroups } from "../../_helpers/fakeData";
+import { pages } from "../../_helpers/fakeData";
 
 class Header extends React.Component<PHeader> {
   getPageName = (): string => {
     const { router } = this.props;
-    const pages: Page[] = flat(pageGroups.map(d => d.pages));
     const curPage: Page | undefined = pages.find(d => d.to === router.pathname);
     return curPage ? curPage.name : "";
   };

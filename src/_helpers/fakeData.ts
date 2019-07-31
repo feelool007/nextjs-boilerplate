@@ -1,26 +1,19 @@
-import { Dashboard, People } from "@material-ui/icons";
+import { Dashboard, Home } from "@material-ui/icons";
 
-import { PageGroup } from "../components/Sidebar";
+import { PageGroup, Page } from "../components/Sidebar";
 
-export const pageGroups: PageGroup[] = [
-  {
-    icon: People,
-    groupName: "Index",
-    pages: [
-      { name: "index", to: "/" },
-      { name: "Notifications", to: "/notifications" },
-      { name: "Buttons", to: "/buttons" },
-      { name: "Selection Controls", to: "/selection-controls" },
-      { name: "Form", to: "/form" },
-      { name: "DataTable", to: "/datatable" }
-    ]
-  },
+export const pageGroups: Array<PageGroup> = [
   {
     icon: Dashboard,
-    groupName: "About",
-    pages: [
-      { name: "About", to: "/about" },
-      { name: "ErrorPage", to: "/nothing" }
-    ]
+    groupName: "Components"
   }
+];
+
+export const pages: Array<Page> = [
+  { name: "index", to: "/", icon: Home },
+  { name: "Notifications", to: "/notifications", groupName: "Components" },
+  { name: "Buttons", to: "/buttons", groupName: "Components" },
+  { name: "Selection Controls", to: "/selection-controls", groupName: "Components" },
+  { name: "Form", to: "/form", groupName: "Components" },
+  { name: "DataTable", to: "/datatable", groupName: "Components" }
 ];
