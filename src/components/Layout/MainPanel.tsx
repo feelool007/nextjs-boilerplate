@@ -6,8 +6,8 @@ import { layoutStyles } from "./styles";
 
 class MainPanel extends React.Component<PMainPanel> {
   render = () => {
-    const { children, classes } = this.props;
-    return <div className={classes.mainPanel}>{children}</div>;
+    const { children, classes, ...divProps } = this.props;
+    return <div className={classes.mainPanel} {...divProps}>{children}</div>;
   };
 }
 

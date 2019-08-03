@@ -73,7 +73,8 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
     });
   };
 
-  getLabelDisplayedRows: TablePaginationProps["labelDisplayedRows"] = ({ from, to, count }) => {
+  getLabelDisplayedRows: TablePaginationProps["labelDisplayedRows"] = ({ from, to }) => {
+    const count = this.props.data.length;
     return `第${from} - ${to}筆，共${count}筆`;
   };
 

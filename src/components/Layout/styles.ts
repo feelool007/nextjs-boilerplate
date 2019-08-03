@@ -33,5 +33,16 @@ export const layoutStyles = (theme: Theme) => createStyles({
     left: 0,
     width: "100vw",
     zIndex: 9999
+  },
+  scrollTop: {
+    position: "fixed",
+    right: theme.spacing(4),
+    bottom: theme.spacing(6),
+    opacity: .2,
+    zIndex: 10000,
+    transition: "opacity .15s ease-in",
+    "&:hover": {
+      opacity: .5
+    }
   }
 });

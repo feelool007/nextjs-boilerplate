@@ -7,18 +7,22 @@ import SidebarWrapper from "./SidebarWrapper";
 import MainPanel from "./MainPanel";
 import Container from "./Container";
 import PageProgress from "./PageProgress";
+import ScrollTop from "./ScrollTop";
 import { Sidebar } from "../Sidebar";
 import { Header } from "../Header";
 import { Footer } from "../Footer";
 import { pages, pageGroups } from "../../_helpers/fakeData";
 
 class Layout extends React.Component<PLayout, SLayout> {
+  private __scrollTopThreshold: number = 450;
+
   constructor(props: PLayout) {
     super(props);
     this.state = {
       rwdOpen: false,
       mini: false,
-      loading: false
+      loading: false,
+      showScrollTop: false
     };
   }
 
@@ -44,6 +48,12 @@ class Layout extends React.Component<PLayout, SLayout> {
     this.setState({ loading: false });
   };
 
+  handleScroll: React.EventHandler<React.UIEvent<HTMLDivElement>> = event => {
+    this.setState({
+      showScrollTop: event.currentTarget.scrollTop >= this.__scrollTopThreshold
+    });
+  };
+
   componentDidMount = () => {
     const { router } = this.props;
     router.events.on("routeChangeStart", this.handlePageStartLoading);
@@ -53,7 +63,7 @@ class Layout extends React.Component<PLayout, SLayout> {
 
   render = () => {
     const { children } = this.props;
-    const { mini, rwdOpen, loading } = this.state;
+    const { mini, rwdOpen, loading, showScrollTop } = this.state;
     return (
       <Wrapper>
         {loading && <PageProgress />}
@@ -67,7 +77,7 @@ class Layout extends React.Component<PLayout, SLayout> {
             onToggleRwd={this.handleToggleRwd}
           />
         </SidebarWrapper>
-        <MainPanel>
+        <MainPanel id="main-panel" onScroll={this.handleScroll}>
           <Container>
             <Header onToggleMini={this.handleToggleMini} onToggleRwd={this.handleToggleRwd}>
               You can put your own actions here.
@@ -81,6 +91,7 @@ class Layout extends React.Component<PLayout, SLayout> {
             <Footer />
           </Container>
         </MainPanel>
+        {showScrollTop && <ScrollTop />}
       </Wrapper>
     );
   };

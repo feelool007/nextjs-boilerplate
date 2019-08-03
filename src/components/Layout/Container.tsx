@@ -11,13 +11,14 @@ class Container extends React.Component<PContainer> {
   };
 
   render = () => {
-    const { flex, children, classes } = this.props;
+    const { flex, children, classes, ...divProps } = this.props;
     return (
       <div
         className={classNames({
           [classes.container]: true,
           [classes.flex]: flex
         })}
+        {...divProps}
       >
         {children}
       </div>
