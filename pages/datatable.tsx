@@ -20,6 +20,23 @@ const data: Array<DataType> = [
   { index: 5, name: "Morgan", gender: "female", age: 30, phone: 3456, email: "Morgan@mail.com" },
   { index: 6, name: "Credo", gender: "male", age: 33, phone: 3456, email: "Credo@mail.com" },
   { index: 7, name: "Dante", gender: "male", age: 27, phone: 3456, email: "Dante@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
+  { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" },
   { index: 8, name: "Sekiro", gender: "male", age: 28, phone: 3456, email: "Sekiro@mail.com" }
 ];
 
