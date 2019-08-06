@@ -6,7 +6,7 @@ import { PScrollTop } from "./types";
 import { layoutStyles } from "./styles";
 import { Fab } from "../Button";
 
-const ScrollTop: React.SFC<PScrollTop> = props => {
+const ScrollTop: React.FunctionComponent<PScrollTop> = props => {
   const handleScrollTop = () => {
     const target = document.querySelector("#main-panel");
     if (target) {
