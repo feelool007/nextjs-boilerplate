@@ -40,6 +40,7 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
 
   private __csvHeaders: PCSVDownload["headers"];
   private __tableContentRef = React.createRef<HTMLDivElement>();
+  private __count: number; // data count after search.
 
   constructor(props: PDataTable) {
     super(props);
@@ -74,8 +75,8 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
     });
   };
 
-  getLabelDisplayedRows: TablePaginationProps["labelDisplayedRows"] = ({ from, to }) => {
-    const count = this.props.data.length;
+  getLabelDisplayedRows: TablePaginationProps["labelDisplayedRows"] = ({ from, to, count }) => {
+    // const count = this.props.data.length;
     return `第${from} - ${to}筆，共${count}筆`;
   };
 
@@ -174,14 +175,17 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
     const { headers } = this.props;
     const { searchValue } = this.state;
     if (searchValue !== "") {
-      return data.filter(d => {
+      const dataSearched = data.filter(d => {
         // 只要其中一欄資料有包含search，就回傳true
         return headers.some(h => {
           if (!d[h.column]) return false;
           return d[h.column].toString().includes(searchValue);
         });
       });
+      this.__count = dataSearched.length;
+      return dataSearched;
     } else {
+      this.__count = data.length;
       return data;
     }
   };
@@ -234,18 +238,18 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
 
   getContent = () => {
     const { sort } = this.props;
-
+    // append origin data index.
     let data = this.props.data.map((d, index) => {
       return {
         ...d,
         dataIX: index
       };
     });
+    data = this.getSearchData(data);
     if (sort) {
       data = this.getSortedData(data);
       data = this.getPageData(data);
     }
-    data = this.getSearchData(data);
     return data;
   };
 
@@ -395,7 +399,7 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
         </div>
         <TablePagination
           component="div"
-          count={data.length}
+          count={this.__count}
           page={page}
           rowsPerPage={rowsPerPage}
           rowsPerPageOptions={rowsPerPageOptions}
