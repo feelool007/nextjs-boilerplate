@@ -31,6 +31,7 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
     title: "",
     search: true,
     csv: true,
+    print: true,
     viewColumns: true,
     rowsPerPageOptions: [10, 25, 50],
     actions: [],
@@ -38,6 +39,7 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
   };
 
   private __csvHeaders: PCSVDownload["headers"];
+  private __tableContentRef = React.createRef<HTMLDivElement>();
 
   constructor(props: PDataTable) {
     super(props);
@@ -59,7 +61,6 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
       key: d.column.toString(),
       label: d.label
     }));
-    // this.__refToPrint = React.createRef();
   }
 
   handleChangePage: TablePaginationProps["onChangePage"] = (_, page) => {
@@ -233,7 +234,6 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
 
   getContent = () => {
     const { sort } = this.props;
-    const { columnOptions } = this.state;
 
     let data = this.props.data.map((d, index) => {
       return {
@@ -265,9 +265,8 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
       title,
       search,
       csv,
+      print,
       viewColumns
-      // printable,
-      // minWidth,
       // components,
       // getTableRowStyle,
     } = this.props;
@@ -279,47 +278,6 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
 
     return (
       <Paper className={classes.root}>
-        {/* {toolbar && (
-          <React.Fragment>
-            <Hidden smDown>
-              <TableToolbar
-                data={this.props.data}
-                title={title}
-                searchable={searchable}
-                filterble={filterble}
-                searchValue={search}
-                filters={filters}
-                csv={csv}
-                csvFilename={csvFilename}
-                csvHeaders={this.csvHeaders}
-                printable={printable}
-                printComponentRef={this.__refToPrint.current}
-                onSearch={this.handleChangeSearch}
-                onResetSearch={this.handleResetSearch}
-                onFilter={this.handleChangeFilter}
-              />
-            </Hidden>
-            <Hidden mdUp>
-              <TableToolbar
-                mini
-                data={this.props.data}
-                title={title}
-                searchable={searchable}
-                filterble={filterble}
-                searchValue={search}
-                filters={filters}
-                csv={csv}
-                csvFilename={csvFilename}
-                csvHeaders={this.csvHeaders}
-                printable={printable}
-                printComponentRef={this.__refToPrint.current}
-                onSearch={this.handleChangeSearch}
-                onResetSearch={this.handleResetSearch}
-                onFilter={this.handleChangeFilter}
-              />
-            </Hidden>
-          </React.Fragment>
-        )} */}
         {toolbar && (
           <TableToolbar
             title={title}
@@ -336,6 +294,10 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
               headers: this.__csvHeaders,
               data: data
             }}
+            print={print}
+            PrintTableProps={{
+              contentEl: this.__tableContentRef.current!
+            }}
             viewColumns={viewColumns}
             ViewColumnsProps={{
               options: columnOptions,
@@ -343,92 +305,94 @@ class DataTable extends React.Component<PDataTable, SDataTable> {
             }}
           />
         )}
-        <Table padding="default" size="small">
-          <TableHead>
-            <TableRow className={classes.header}>
-              {select && (
-                // if select, show checkbox on head
-                <TableCell padding="checkbox">
-                  <Checkbox color="secondary" checked={this.isSelectAll()} onChange={this.handleSelectAll} />
-                </TableCell>
-              )}
-              {headers.map((header, index) => {
-                return (
-                  <TableCell key={index}>
-                    <TableSortLabel
-                      active={sort && sortBy === header.column}
-                      direction={sortDirection}
-                      onClick={() => this.handleChangeSort(header.column)}
-                    >
-                      {header.label}
-                    </TableSortLabel>
+        <div ref={this.__tableContentRef}>
+          <Table padding="default" size="small">
+            <TableHead>
+              <TableRow className={classes.header}>
+                {select && (
+                  // if select, show checkbox on head
+                  <TableCell padding="checkbox">
+                    <Checkbox color="secondary" checked={this.isSelectAll()} onChange={this.handleSelectAll} />
                   </TableCell>
+                )}
+                {headers.map((header, index) => {
+                  return (
+                    <TableCell key={index}>
+                      <TableSortLabel
+                        active={sort && sortBy === header.column}
+                        direction={sortDirection}
+                        onClick={() => this.handleChangeSort(header.column)}
+                      >
+                        {header.label}
+                      </TableSortLabel>
+                    </TableCell>
+                  );
+                })}
+                {// show row actions
+                actions!.map((_, index) => {
+                  return <TableCell key={index}>{actionHeaders![index] || `動作${index + 1}`}</TableCell>;
+                })}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((d, rowIX) => {
+                return (
+                  <TableRow
+                    key={rowIX}
+                    className={classNames(classes.body, {
+                      [classes.hover]: hover,
+                      [classes.pickable]: pick,
+                      [classes.picked]: this.isPick(d[pickBy!])
+                    })}
+                    onClick={this.handlePick(d[pickBy!])}
+                  >
+                    {select && (
+                      // if select, show checkbox on each row
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          color="secondary"
+                          checked={this.isSelected(d[selectBy!])}
+                          onChange={() => this.handleSelect(d[selectBy!])}
+                        />
+                      </TableCell>
+                    )}
+                    {columns.map((col, colIX) => {
+                      return (
+                        // (TBodyCell ? (
+                        //   <TBodyCell
+                        //     key={colIX}
+                        //     column={col}
+                        //     columnIndex={colIX}
+                        //     data={d}
+                        //     value={this.formatContent(d[col])}
+                        //   />
+                        // ) : (
+                        //   <TableCell key={colIX} className={classes.tableCell}>
+                        //     {this.formatContent(d[col])}
+                        //   </TableCell>
+                        // ))
+                        <TableCell key={colIX} className={classes.tableCell}>
+                          {this.formatContent(d[col])}
+                          {/* {d[col]} */}
+                        </TableCell>
+                      );
+                    })}
+                    {// show row actions
+                    actions!.map((action, childIX) => {
+                      return (
+                        <TableCell key={childIX}>
+                          {React.cloneElement(action, {
+                            data: d
+                          })}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
                 );
               })}
-              {// show row actions
-              actions!.map((_, index) => {
-                return <TableCell key={index}>{actionHeaders![index] || `動作${index + 1}`}</TableCell>;
-              })}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((d, rowIX) => {
-              return (
-                <TableRow
-                  key={rowIX}
-                  className={classNames(classes.body, {
-                    [classes.hover]: hover,
-                    [classes.pickable]: pick,
-                    [classes.picked]: this.isPick(d[pickBy!])
-                  })}
-                  onClick={this.handlePick(d[pickBy!])}
-                >
-                  {select && (
-                    // if select, show checkbox on each row
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        color="secondary"
-                        checked={this.isSelected(d[selectBy!])}
-                        onChange={() => this.handleSelect(d[selectBy!])}
-                      />
-                    </TableCell>
-                  )}
-                  {columns.map((col, colIX) => {
-                    return (
-                      // (TBodyCell ? (
-                      //   <TBodyCell
-                      //     key={colIX}
-                      //     column={col}
-                      //     columnIndex={colIX}
-                      //     data={d}
-                      //     value={this.formatContent(d[col])}
-                      //   />
-                      // ) : (
-                      //   <TableCell key={colIX} className={classes.tableCell}>
-                      //     {this.formatContent(d[col])}
-                      //   </TableCell>
-                      // ))
-                      <TableCell key={colIX} className={classes.tableCell}>
-                        {this.formatContent(d[col])}
-                        {/* {d[col]} */}
-                      </TableCell>
-                    );
-                  })}
-                  {// show row actions
-                  actions!.map((action, childIX) => {
-                    return (
-                      <TableCell key={childIX}>
-                        {React.cloneElement(action, {
-                          data: d
-                        })}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+            </TableBody>
+          </Table>
+        </div>
         <TablePagination
           component="div"
           count={data.length}

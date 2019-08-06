@@ -1,6 +1,7 @@
 import { WithStyles, Omit } from "@material-ui/core";
 import { TableProps } from "@material-ui/core/Table";
 import { LinkProps } from "react-csv/components/Link";
+import ReactToPrintProps from "react-to-print";
 
 import { toolbarStyles, dataTableStyles } from "./styles";
 import { PInput } from "../Input";
@@ -34,6 +35,7 @@ export interface PDataTable
   title?: React.ReactNode;
   search?: boolean;
   csv?: boolean;
+  print?: boolean;
   viewColumns?: boolean;
   rowsPerPageOptions?: Array<number>;
   actions?: Array<React.ReactElement>;
@@ -61,6 +63,8 @@ export interface PTableToolbar extends WithStyles<typeof toolbarStyles> {
   CSVDownloadProps: Omit<PCSVDownload, "classes">;
   viewColumns?: boolean;
   ViewColumnsProps: Omit<PViewColumns, "classes">;
+  print: boolean;
+  PrintTableProps: Omit<PPrintTable, "classes">;
 }
 
 export interface STableToolbar {}
@@ -83,4 +87,8 @@ export interface PViewColumns extends WithStyles<typeof toolbarStyles> {
 
 export interface SViewColumns {
   open: boolean;
+}
+
+export interface PPrintTable extends WithStyles<typeof toolbarStyles> {
+  contentEl: Element;
 }
